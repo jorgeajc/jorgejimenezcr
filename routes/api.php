@@ -13,6 +13,7 @@ use App\Http\Controllers\Skills\LogicSkillsController;
 use App\Http\Controllers\Colors\LogicColorsController;
 use App\Http\Controllers\ProgrammingLanguages\LogicProgrammingLanguagesController;
 use App\Http\Controllers\Levels\LogicLevelsController;
+use App\Http\Controllers\User\Skills\LogicUserSkillsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,12 +39,20 @@ Route::group(['middleware' => 'auth:api'], function () {
         /**
          * apis skill
          */
-        Route::get('/skills', [LogicSkillsController::class, "all"]);
+        Route::get('skills', [LogicSkillsController::class, "all"]);
         Route::get('skills/active', [LogicSkillsController::class, "getActive"]);
         Route::get('skills/{id}', [LogicSkillsController::class, "find"]);
         Route::post('skills', [LogicSkillsController::class, "create"]);
         Route::put('skills/{id}', [LogicSkillsController::class, "update"]);
         Route::patch('skills/{id}/status', [LogicSkillsController::class, "changeStatus"]);
+
+        /**
+         * User skill
+         */
+        Route::get('user/skills', [LogicUserSkillsController::class, "userSkills"]);
+        Route::post('user/skills', [LogicUserSkillsController::class, "addSkillToUser"]);
+        Route::delete('user/skills', [LogicUserSkillsController::class, "removeSkillToUser"]);
+        Route::patch('user/skills', [LogicUserSkillsController::class, "changeStatusSkillToUser"]);
 
         /**
          * apis Colors

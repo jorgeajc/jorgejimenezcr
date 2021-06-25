@@ -131,7 +131,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         return $this->hasMany(Experiences::class);
     }
     public function skills() {
-        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('user_id', 'skills_id');
+        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('user_id', 'skills_id', 'is_active');
     }
     public function social_media() {
         return $this->hasMany(SocialsMedias::class);

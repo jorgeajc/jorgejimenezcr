@@ -31,5 +31,4 @@ class UserController extends Controller {
         $this->editUser($request);
         return redirect()->back();
     }
-    // User::find(1)->skills()->attach(5, ["percentage" => "30", "color_id"=>3, "levels_id"=>2])
 }
