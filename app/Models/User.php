@@ -22,8 +22,17 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'whatsapp',
+        'birthday',
+        'facebook_id',
+        'google_id',
+        'country',
+        'address',
+        'about_me',
+        'my_carrer',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -112,5 +121,21 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getBirthdayAttribute() {
+        return Carbon::parse($this->attributes['birthday'])->age;
+    }
+    public function experiences() {
+        return $this->hasMany(Experiences::class);
+    }
+    public function skills() {
+        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('skills_id', 'percentage', 'color_id', 'levels_id');
+    }
+    public function social_media() {
+        return $this->hasMany(SocialMedia::class);
+    }
+    public function educations() {
+        return $this->hasMany(Education::class);
     }
 }
