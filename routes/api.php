@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:api'], function () {
          * User skill
          */
         Route::get('user/skills', [LogicUserSkillsController::class, "userSkills"]);
+        Route::get('user/{u_id}/skills/{s_id}', [LogicUserSkillsController::class, "findUserSkill"]);
         Route::post('user/skills', [LogicUserSkillsController::class, "addSkillToUser"]);
         Route::delete('user/skills', [LogicUserSkillsController::class, "removeSkillToUser"]);
         Route::patch('user/skills', [LogicUserSkillsController::class, "changeStatusSkillToUser"]);

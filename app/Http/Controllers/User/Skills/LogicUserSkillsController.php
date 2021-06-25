@@ -112,6 +112,21 @@ class LogicUserSkillsController extends Controller
         return $this->responses->jsonSuccess( $user->skills );
     }
 
+    public function findUserSkill($user_id, $skill_id){
+        $user = User::find( $user_id );
+
+        $errors = [];
+
+        if( !$user ) $errors["user"] = "User not found";
+        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+
+        $skill = $user->skills()->where('skills_id', $skill_id)->first();
+        if( !$skill ) $errors["user"] = "User not has the skill";
+        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+
+        return $this->responses->jsonSuccess( $skill );
+    }
+
 
     public function userHasSkill($user, $skill_id) {
         return $user->skills()->where('skills_id', $skill_id)->first();
