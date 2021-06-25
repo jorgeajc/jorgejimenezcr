@@ -14,7 +14,7 @@ class LogicColorsController extends Controller {
     protected $responses;
 
     public function __construct() {
-        $this->rules = new RulesColorController;
+        $this->rules = new RulesColorsController;
         $this->responses = new HandlerResponsesController;
     }
     public function all() {
