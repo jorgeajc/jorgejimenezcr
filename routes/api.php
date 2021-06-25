@@ -12,6 +12,7 @@ use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Skills\LogicSkillsController;
 use App\Http\Controllers\Colors\LogicColorsController;
 use App\Http\Controllers\ProgrammingLanguages\LogicProgrammingLanguagesController;
+use App\Http\Controllers\Levels\LogicLevelsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,7 +64,17 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('programming/languages', [LogicProgrammingLanguagesController::class, "create"]);
         Route::put('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "update"]);
         Route::patch('programming/languages/{id}/status', [LogicProgrammingLanguagesController::class, "changeStatus"]);
-    });
+
+        /**
+         * apis Programming languages
+         */
+        Route::get('level', [LogicLevelsController::class, "all"]);
+        Route::get('level/active', [LogicLevelsController::class, "getActive"]);
+        Route::get('level/{id}', [LogicLevelsController::class, "find"]);
+        Route::post('level', [LogicLevelsController::class, "create"]);
+        Route::put('level/{id}', [LogicLevelsController::class, "update"]);
+        Route::patch('level/{id}/status', [LogicLevelsController::class, "changeStatus"]);
+   });
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
