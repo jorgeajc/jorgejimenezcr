@@ -15,13 +15,10 @@ class UsersSkills extends Migration
     {
         Schema::create('users_skills', function (Blueprint $table) {
             $table->id();
-            $table->string('percentage');
             $table->boolean('is_active')->default(true);
 
             $table->integer('skills_id');
-            $table->integer('levels_id');
             $table->integer('user_id');
-            $table->integer('color_id');
             $table->timestamps();
         });
     }

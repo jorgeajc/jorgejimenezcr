@@ -14,7 +14,6 @@ class Experiences extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'name',
         'place',
         'is_active',

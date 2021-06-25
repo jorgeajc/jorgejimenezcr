@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class EducationSeeder extends Seeder {
+class EducationsSeeder extends Seeder {
     public function run() {
         \DB::table('education')->insert([
             [

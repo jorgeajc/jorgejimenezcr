@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+use Carbon\Carbon;
 class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 {
     use Notifiable,
@@ -130,12 +131,15 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         return $this->hasMany(Experiences::class);
     }
     public function skills() {
-        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('skills_id', 'percentage', 'color_id', 'levels_id');
+        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('user_id', 'skills_id');
     }
     public function social_media() {
-        return $this->hasMany(SocialMedia::class);
+        return $this->hasMany(SocialsMedias::class);
     }
     public function educations() {
-        return $this->hasMany(Education::class);
+        return $this->hasMany(Educations::class);
+    }
+    public function programmingLanguages() {
+        return $this->belongsToMany(ProgrammingLanguages::class, 'users_programming_languages')->withPivot('user_id', 'programming_languages_id', 'percentage', 'year_experience', 'is_active');
     }
 }

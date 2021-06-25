@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Color;
+namespace App\Http\Controllers\Levels;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LogicColorController extends Controller
+class RulesLevelsController extends Controller
 {
     //
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProgrammingLanguagesTable extends Migration
+class UsersProgrammingLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateProgrammingLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('programming_languages', function (Blueprint $table) {
+        Schema::create('users_programming_languages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('percentage');
+            $table->string('year_experience')->default(1);
             $table->boolean('is_active')->default(true);
+
+            $table->integer('programming_languages_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateProgrammingLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('programming_language');
+        //
     }
 }

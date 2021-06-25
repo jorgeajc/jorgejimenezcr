@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Skills\LogicSkillsController;
+use App\Http\Controllers\Color\LogicColorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,12 +32,26 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/profile', [ProfileController::class, 'update']);
     Route::patch('settings/password', [PasswordController::class, 'update']);
 
+    /**
+     * apis skill
+     */
     Route::get('/skills', [LogicSkillsController::class, "all"]);
     Route::get('/skills/active', [LogicSkillsController::class, "getActive"]);
     Route::get('/skills/{id}', [LogicSkillsController::class, "find"]);
     Route::post('/skills', [LogicSkillsController::class, "create"]);
     Route::put('/skills/{id}', [LogicSkillsController::class, "update"]);
     Route::patch('/skills/{id}/status', [LogicSkillsController::class, "changeStatus"]);
+
+    /**
+     * apis skill
+     */
+    Route::get('/colors', [LogicColorController::class, "all"]);
+    Route::get('/colors/active', [LogicColorController::class, "getActive"]);
+    Route::get('/colors/{id}', [LogicColorController::class, "find"]);
+    Route::post('/colors', [LogicColorController::class, "create"]);
+    Route::put('/colors/{id}', [LogicColorController::class, "update"]);
+    Route::patch('/colors/{id}/status', [LogicColorController::class, "changeStatus"]);
+
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

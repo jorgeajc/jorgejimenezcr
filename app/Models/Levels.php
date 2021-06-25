@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Levels extends Model {
     use HasFactory;
     protected $fillable = [
-        'id',
         'name',
         'is_active'
     ];

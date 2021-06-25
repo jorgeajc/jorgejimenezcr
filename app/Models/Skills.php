@@ -10,19 +10,14 @@ class Skills extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'name',
-        'levels_id',
-        'is_active',
-        'percentage',
-        'user_id',
-        'color_id'
+        'is_active'
     ];
     public function color() {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Colors::class);
     }
     public function users() {
-        return $this->belongsToMany(User::class, 'users_skills')->withPivot('user_id', 'percentage', 'color_id', 'levels_id');
+        return $this->belongsToMany(User::class, 'users_skills')->withPivot('user_id', 'skills_id');
     }
     public function level() {
         return $this->belongsTo(Levels::class, 'levels_id');

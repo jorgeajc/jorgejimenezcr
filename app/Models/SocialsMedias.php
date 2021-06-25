@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Programming_language extends Model
+class SocialsMedias extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'id',
         'name',
+        'link',
         'is_active',
-        'year_experience'
     ];
 
+    public function users() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function color() {
+        return $this->belongsTo(Colors::class);
+    }
 }

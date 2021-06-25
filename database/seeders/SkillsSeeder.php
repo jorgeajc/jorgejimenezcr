@@ -15,21 +15,11 @@ class SkillsSeeder extends Seeder
     {
         \DB::table('skills')->insert([
             [
-                "name" => "HTML",
+                "name" => "Amabilidad",
             ],[
-                "name" => "CSS",
+                "name" => "Compañerismo",
             ],[
-                "name" => "JavaScript",
-            ],[
-                "name" => "WordPress",
-            ],[
-                "name" => "Adobe Photoshop",
-            ],[
-                "name" => "Adobe Illustrator",
-            ],[
-                "name" => "Sketch",
-            ],[
-                "name" => "Adobe XD",
+                "name" => "trabajo equipo",
             ],
         ]);
     }

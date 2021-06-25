@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
-class ExperienceSeeder extends Seeder
+class ExperiencesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
