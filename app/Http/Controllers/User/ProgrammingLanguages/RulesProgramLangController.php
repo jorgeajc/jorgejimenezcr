@@ -8,31 +8,9 @@ use App\Http\Controllers\Controller;
 class RulesProgramLangController extends Controller {
     public function validateCreate($request) {
         $validator = Validator::make($request->all(), [
-            'user'  => 'required',
             'programming_lang_id'  => 'required',
             'percentage'  => 'required',
 	        'year_experience'  => 'required|integer'
-        ]);
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            return [];
-        }
-    }
-    public function validateIds($request) {
-        $validator = Validator::make($request->all(), [
-            'user'  => 'required',
-            'programming_lang_id'  => 'required'
-        ]);
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            return [];
-        }
-    }
-    public function validateUserId($request) {
-        $validator = Validator::make($request->all(), [
-            'user'  => 'required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

@@ -15,6 +15,7 @@ use App\Http\Controllers\ProgrammingLanguages\LogicProgrammingLanguagesControlle
 use App\Http\Controllers\Levels\LogicLevelsController;
 use App\Http\Controllers\User\Skills\LogicUserSkillsController;
 use App\Http\Controllers\User\ProgrammingLanguages\LogicUserProgramLangController;
+use App\Http\Controllers\User\SocialsMedias\LogicSocialsMediasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,21 +82,31 @@ Route::group(['middleware' => 'auth:api'], function () {
             /**
              * User skill
              */
-            Route::get('skills', [LogicUserSkillsController::class, "userSkills"]);
-            Route::get('{u_id}/skills/{s_id}', [LogicUserSkillsController::class, "findUserSkill"]);
-            Route::post('skills', [LogicUserSkillsController::class, "addSkillToUser"]);
-            Route::delete('skills', [LogicUserSkillsController::class, "removeSkillToUser"]);
-            Route::patch('skills', [LogicUserSkillsController::class, "changeStatusSkillToUser"]);
+            Route::get('skills', [LogicUserSkillsController::class, "all"]);
+            Route::get('skills/{s_id}', [LogicUserSkillsController::class, "find"]);
+            Route::post('skills', [LogicUserSkillsController::class, "create"]);
+            Route::delete('skills/{s_id}', [LogicUserSkillsController::class, "remove"]);
+            Route::patch('skills/{s_id}', [LogicUserSkillsController::class, "changeStatus"]);
 
             /**
              * apis user Programming languages
              */
 
-            Route::get('programming/languages', [LogicUserProgramLangController::class, "userProgramLangs"]);
-            Route::get('{u_id}/programming/languages/{s_id}', [LogicUserProgramLangController::class, "findUserProgramLangs"]);
-            Route::post('programming/languages', [LogicUserProgramLangController::class, "addProgrammingLangToUser"]);
-            Route::delete('programming/languages', [LogicUserProgramLangController::class, "removeProgramLangsToUser"]);
-            Route::patch('programming/languages', [LogicUserProgramLangController::class, "changeStatusProgramLangsToUser"]);
+            Route::get('programming/languages', [LogicUserProgramLangController::class, "all"]);
+            Route::get('programming/languages/{s_id}', [LogicUserProgramLangController::class, "find"]);
+            Route::post('programming/languages', [LogicUserProgramLangController::class, "create"]);
+            Route::delete('programming/languages/{s_id}', [LogicUserProgramLangController::class, "remove"]);
+            Route::patch('programming/languages/{s_id}', [LogicUserProgramLangController::class, "changeStatus"]);
+
+            /**
+             * apis user Programming languages
+             */
+
+            Route::get('socials/medias', [LogicSocialsMediasController::class, "all"]);
+            Route::get('socials/medias/{s_id}', [LogicSocialsMediasController::class, "find"]);
+            Route::post('socials/medias', [LogicSocialsMediasController::class, "create"]);
+            Route::put('socials/medias/{s_id}', [LogicSocialsMediasController::class, "update"]);
+            Route::patch('socials/medias/{s_id}', [LogicSocialsMediasController::class, "changeStatus"]);
         });
    });
 });

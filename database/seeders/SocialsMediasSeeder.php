@@ -12,7 +12,7 @@ class SocialsMediasSeeder extends Seeder
      * @return void
      */
     public function run() {
-        \DB::table('social_media')->insert([
+        \DB::table('socials_medias')->insert([
             [
                 "name"   => "facebook",
                 'link'   => "google.com",

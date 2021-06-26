@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\User\Skills;
+namespace App\Http\Controllers\User\SocialsMedias;
 
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
-class RulesUserSkillsController extends Controller {
+class RulesSocialsMediasController extends Controller {
     public function validateCreate($request) {
         $validator = Validator::make($request->all(), [
-            'skill_id'  => 'required',
+            'name'  => 'required',
+            'link'  => 'required',
+            'color_id'  => 'required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -16,9 +18,11 @@ class RulesUserSkillsController extends Controller {
             return [];
         }
     }
-    public function validateRemove($request) {
+    public function validateUpdate($request) {
         $validator = Validator::make($request->all(), [
-            'skill_id'  => 'required',
+            'name'  => 'required',
+            'link'  => 'required',
+            'color_id'  => 'required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

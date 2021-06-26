@@ -9,7 +9,7 @@ use App\Http\Controllers\HandlerResponses\HandlerResponsesController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Skills;
-
+use Auth;
 class LogicUserSkillsController extends Controller
 {
     protected $rules;
@@ -20,114 +20,63 @@ class LogicUserSkillsController extends Controller
         $this->responses = new HandlerResponsesController;
     }
 
-    public function addSkillToUser(Request $request) {
+    public function all( Request $request ) {
+        $user = Auth::user();
+
+        if( count($user->skills) == 0 ) return $this->responses->jsonNotFound(["user" => "User not has the skill"]);
+
+        return $this->responses->jsonSuccess( $user->skills );
+    }
+    public function find( $skill_id ){
+        $user = Auth::user();
+
+        $skill = $this->userHasSkill($user, $skill_id);
+        if( !$skill ) return $this->responses->jsonNotFound(["user" => "User not has the skill"]);
+
+        return $this->responses->jsonSuccess( $skill );
+    }
+    public function create(Request $request) {
         $validate = $this->rules->validateCreate($request);
         if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
 
-        $user_id = $request->user;
-        $skill_id = $request->skill;
+        $skill_id = $request->skill_id;
 
-        $user = User::find( $user_id );
+        $user = Auth::user();
         $skill = Skills::find( $skill_id );
 
-        $errors = [];
-
-        if( !$user ) $errors["user"] = "User not found";
-        if( !$skill ) $errors["skill"] = "Skill not found";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+        if( !$skill ) return $this->responses->jsonNotFound(["skill" => "Skill not found"]);
 
         $hasSkill = $this->userHasSkill($user, $skill->id);
-        if( $hasSkill ) $errors["user"] = "User already has the skill";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+        if( $hasSkill ) return $this->responses->jsonNotFound(["user" => "User already has the skill"]);
 
         $user->skills()->attach($skill);
         return $this->responses->jsonSuccess( $user->skills );
     }
-
-    public function removeSkillToUser(Request $request) {
-        $validate = $this->rules->validateCreate($request);
-        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
-
-        $user_id = $request->user;
-        $skill_id = $request->skill;
-
-        $user = User::find( $user_id );
-        $skill = Skills::find( $skill_id );
-
-        $errors = [];
-
-        if( !$user ) $errors["user"] = "User not found";
-        if( !$skill ) $errors["skill"] = "Skill not found";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+    public function remove( $skill_id ) {
+        $user = Auth::user();
 
         $hasSkill = $this->userHasSkill($user, $skill->id);
-        if( !$hasSkill ) $errors["user"] = "User not has the skill";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+        if( !$hasSkill )  return $this->responses->jsonNotFound( ["user" => "User not has the skill"]);
 
-        $user->skills()->detach($skill);
-        return $this->responses->jsonSuccess( $user->skills );
+        $user->skills()->detach([$skill_id]);
+        $skills = $user->skills;
+
+        if( count($skills) > 0 ) return $this->responses->jsonSuccess(  $skills );
+        return $this->responses->jsonSuccess(  ["user" => "User not has the skills"] );
     }
+    public function changeStatus( $skill_id ) {
+        $user = Auth::user();
 
-    public function changeStatusSkillToUser(Request $request) {
-        $validate = $this->rules->validateCreate($request);
-        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
-
-        $user_id = $request->user;
-        $skill_id = $request->skill;
-
-        $user = User::find( $user_id );
-        $skill = Skills::find( $skill_id );
-
-        $errors = [];
-
-        if( !$user ) $errors["user"] = "User not found";
-        if( !$skill ) $errors["skill"] = "Skill not found";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
-
+        $skill = $this->userHasSkill($user, $skill_id);
+        if( !$skill ) return $this->responses->jsonNotFound( ["user" => "User not has the skill"] );
 
         $update = $user->skills()->updateExistingPivot($skill->id, [
-            "is_active" => !$skill->is_active
+            "is_active" => !$skill->pivot->is_active
         ]);
-        if( !$update )return $this->responses->jsonNotFound( ["user" => "User not has the skill"] );
-
-        return $this->responses->jsonSuccess( $user->skills );
-    }
-
-    public function userSkills(Request $request) {
-        $validate = $this->rules->validateUser($request);
-        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
-
-        $user_id = $request->user;
-
-        $user = User::find( $user_id );
-
-        $errors = [];
-
-        if( !$user ) $errors["user"] = "User not found";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
-
-        if( count($user->skills) == 0 ) $errors["user"] = "User not has the skill";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
-
-        return $this->responses->jsonSuccess( $user->skills );
-    }
-
-    public function findUserSkill($user_id, $skill_id){
-        $user = User::find( $user_id );
-
-        $errors = [];
-
-        if( !$user ) $errors["user"] = "User not found";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
-
-        $skill = $user->skills()->where('skills_id', $skill_id)->first();
-        if( !$skill ) $errors["user"] = "User not has the skill";
-        if( count($errors) > 0) return $this->responses->jsonNotFound($errors );
+        if( !$update ) return $this->responses->jsonNotFound( ["user" => "User not has the skill"] );
 
         return $this->responses->jsonSuccess( $skill );
     }
-
-
     public function userHasSkill($user, $skill_id) {
         return $user->skills()->where('skills_id', $skill_id)->first();
     }
