@@ -14,6 +14,7 @@ use App\Http\Controllers\Colors\LogicColorsController;
 use App\Http\Controllers\ProgrammingLanguages\LogicProgrammingLanguagesController;
 use App\Http\Controllers\Levels\LogicLevelsController;
 use App\Http\Controllers\User\Skills\LogicUserSkillsController;
+use App\Http\Controllers\User\ProgrammingLanguages\LogicUserProgramLangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,15 +48,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::patch('skills/{id}/status', [LogicSkillsController::class, "changeStatus"]);
 
         /**
-         * User skill
-         */
-        Route::get('user/skills', [LogicUserSkillsController::class, "userSkills"]);
-        Route::get('user/{u_id}/skills/{s_id}', [LogicUserSkillsController::class, "findUserSkill"]);
-        Route::post('user/skills', [LogicUserSkillsController::class, "addSkillToUser"]);
-        Route::delete('user/skills', [LogicUserSkillsController::class, "removeSkillToUser"]);
-        Route::patch('user/skills', [LogicUserSkillsController::class, "changeStatusSkillToUser"]);
-
-        /**
          * apis Colors
          */
         Route::get('colors', [LogicColorsController::class, "all"]);
@@ -84,6 +76,27 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('level', [LogicLevelsController::class, "create"]);
         Route::put('level/{id}', [LogicLevelsController::class, "update"]);
         Route::patch('level/{id}/status', [LogicLevelsController::class, "changeStatus"]);
+
+        Route::group(['prefix' => 'user'],function (){
+            /**
+             * User skill
+             */
+            Route::get('skills', [LogicUserSkillsController::class, "userSkills"]);
+            Route::get('{u_id}/skills/{s_id}', [LogicUserSkillsController::class, "findUserSkill"]);
+            Route::post('skills', [LogicUserSkillsController::class, "addSkillToUser"]);
+            Route::delete('skills', [LogicUserSkillsController::class, "removeSkillToUser"]);
+            Route::patch('skills', [LogicUserSkillsController::class, "changeStatusSkillToUser"]);
+
+            /**
+             * apis user Programming languages
+             */
+
+            Route::get('programming/languages', [LogicUserProgramLangController::class, "userProgramLangs"]);
+            Route::get('{u_id}/programming/languages/{s_id}', [LogicUserProgramLangController::class, "findUserProgramLangs"]);
+            Route::post('programming/languages', [LogicUserProgramLangController::class, "addProgrammingLangToUser"]);
+            Route::delete('programming/languages', [LogicUserProgramLangController::class, "removeProgramLangsToUser"]);
+            Route::patch('programming/languages', [LogicUserProgramLangController::class, "changeStatusProgramLangsToUser"]);
+        });
    });
 });
 
