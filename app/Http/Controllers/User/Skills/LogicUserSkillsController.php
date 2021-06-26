@@ -55,7 +55,7 @@ class LogicUserSkillsController extends Controller
     public function remove( $skill_id ) {
         $user = Auth::user();
 
-        $hasSkill = $this->userHasSkill($user, $skill->id);
+        $hasSkill = $this->userHasSkill($user, $skill_id);
         if( !$hasSkill )  return $this->responses->jsonNotFound( ["user" => "User not has the skill"]);
 
         $user->skills()->detach([$skill_id]);

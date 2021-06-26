@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 class EducationsSeeder extends Seeder {
     public function run() {
-        \DB::table('education')->insert([
+        \DB::table('educations')->insert([
             [
                 "name"       => "Masters in Information Technology",
                 "place"      => "from International University",

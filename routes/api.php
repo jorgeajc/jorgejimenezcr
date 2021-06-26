@@ -16,6 +16,7 @@ use App\Http\Controllers\Levels\LogicLevelsController;
 use App\Http\Controllers\User\Skills\LogicUserSkillsController;
 use App\Http\Controllers\User\ProgrammingLanguages\LogicUserProgramLangController;
 use App\Http\Controllers\User\SocialsMedias\LogicSocialsMediasController;
+use App\Http\Controllers\User\Educations\LogicEducationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -99,14 +100,22 @@ Route::group(['middleware' => 'auth:api'], function () {
             Route::patch('programming/languages/{s_id}', [LogicUserProgramLangController::class, "changeStatus"]);
 
             /**
-             * apis user Programming languages
+             * apis user Social medias
              */
-
             Route::get('socials/medias', [LogicSocialsMediasController::class, "all"]);
             Route::get('socials/medias/{s_id}', [LogicSocialsMediasController::class, "find"]);
             Route::post('socials/medias', [LogicSocialsMediasController::class, "create"]);
             Route::put('socials/medias/{s_id}', [LogicSocialsMediasController::class, "update"]);
             Route::patch('socials/medias/{s_id}', [LogicSocialsMediasController::class, "changeStatus"]);
+
+            /**
+             * apis user educaction
+             */
+            Route::get('education', [LogicEducationsController::class, "all"]);
+            Route::get('education/{s_id}', [LogicEducationsController::class, "find"]);
+            Route::post('education', [LogicEducationsController::class, "create"]);
+            Route::put('education/{s_id}', [LogicEducationsController::class, "update"]);
+            Route::patch('education/{s_id}', [LogicEducationsController::class, "changeStatus"]);
         });
    });
 });

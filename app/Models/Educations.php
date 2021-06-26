@@ -10,13 +10,15 @@ class Educations extends Model
     use HasFactory;
 
     protected $fillable = [
-        'place_studio',
-        'start_date',
-        'end_date',
+        'name',
+        'place',
+        'description',
+        'start_year',
+        'end_year',
         'status',
         'is_active'
     ];
     public function users() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
