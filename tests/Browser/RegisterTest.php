@@ -25,9 +25,7 @@ class RegisterTest extends DuskTestCase
                     'name' => 'Test User',
                     'email' => 'test@test.app',
                     'password' => 'password',
-                    'password_confirmation' => 'password',
-
-                    'is_active' => true
+                    'password_confirmation' => 'password'
                 ])
                 ->assertPageIs(Home::class);
         });
