@@ -6,6 +6,7 @@ use App\Models\User;
 use Tests\Browser\Pages\Home;
 use Tests\Browser\Pages\Register;
 use Tests\DuskTestCase;
+use Carbon\Carbon;
 
 class RegisterTest extends DuskTestCase
 {
