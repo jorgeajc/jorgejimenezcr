@@ -17,6 +17,7 @@ use App\Http\Controllers\User\Skills\LogicUserSkillsController;
 use App\Http\Controllers\User\ProgrammingLanguages\LogicUserProgramLangController;
 use App\Http\Controllers\User\SocialsMedias\LogicSocialsMediasController;
 use App\Http\Controllers\User\Educations\LogicEducationsController;
+use App\Http\Controllers\User\Experiences\LogicExperiencesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,10 +95,10 @@ Route::group(['middleware' => 'auth:api'], function () {
              */
 
             Route::get('programming/languages', [LogicUserProgramLangController::class, "all"]);
-            Route::get('programming/languages/{s_id}', [LogicUserProgramLangController::class, "find"]);
+            Route::get('programming/languages/{p_id}', [LogicUserProgramLangController::class, "find"]);
             Route::post('programming/languages', [LogicUserProgramLangController::class, "create"]);
-            Route::delete('programming/languages/{s_id}', [LogicUserProgramLangController::class, "remove"]);
-            Route::patch('programming/languages/{s_id}', [LogicUserProgramLangController::class, "changeStatus"]);
+            Route::delete('programming/languages/{p_id}', [LogicUserProgramLangController::class, "remove"]);
+            Route::patch('programming/languages/{p_id}', [LogicUserProgramLangController::class, "changeStatus"]);
 
             /**
              * apis user Social medias
@@ -112,10 +113,19 @@ Route::group(['middleware' => 'auth:api'], function () {
              * apis user educaction
              */
             Route::get('education', [LogicEducationsController::class, "all"]);
-            Route::get('education/{s_id}', [LogicEducationsController::class, "find"]);
+            Route::get('education/{e_id}', [LogicEducationsController::class, "find"]);
             Route::post('education', [LogicEducationsController::class, "create"]);
-            Route::put('education/{s_id}', [LogicEducationsController::class, "update"]);
-            Route::patch('education/{s_id}', [LogicEducationsController::class, "changeStatus"]);
+            Route::put('education/{e_id}', [LogicEducationsController::class, "update"]);
+            Route::patch('education/{e_id}', [LogicEducationsController::class, "changeStatus"]);
+
+            /**
+             * apis user educaction
+             */
+            Route::get('experiences', [LogicExperiencesController::class, "all"]);
+            Route::get('experiences/{e_id}', [LogicExperiencesController::class, "find"]);
+            Route::post('experiences', [LogicExperiencesController::class, "create"]);
+            Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
+            Route::patch('experiences/{e_id}', [LogicExperiencesController::class, "changeStatus"]);
         });
    });
 });

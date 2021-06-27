@@ -20,52 +20,41 @@ class LogicLevelsController extends Controller
     }
     public function all() {
         $levels = Levels::all();
-        if( count($levels) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($levels) == 0 ) return $this->responses->jsonValidationError( ["level"=>__('api.level.no_registered')] );
         return $this->responses->jsonSuccess( $levels );
     }
     public function getActive() {
         $levels = Levels::whereIsActive( true )->get();
-        if( count($levels) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($levels) == 0 ) return $this->responses->jsonValidationError( ["level"=>__('api.level.no_active')] );
         return $this->responses->jsonSuccess( $levels );
     }
     public function find( $id ) {
-        $skill = Levels::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
-        return $this->responses->jsonSuccess( $skill );
+        $level = Levels::find( $id );
+        if( !$level ) return $this->responses->jsonNotFound( ["level"=>__('api.level.not_found')] );
+        return $this->responses->jsonSuccess( $level );
     }
     public function create( Request $request ) {
         $validate = $this->rules->validateCreate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
         return $this->responses->jsonSuccess( Levels::create($request->all()) );
     }
     public function update( $id, Request $request ) {
-        $skill = Levels::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
+        $level = Levels::find( $id );
+        if( !$level ) return $this->responses->jsonNotFound( ["level"=>__('api.level.not_found')] );
+
         $validate = $this->rules->validateUpdate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
-        $skill->update($request->all());
-        return $skill;
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
+
+        $level->update($request->all());
+        return $level;
     }
     public function changeStatus( $id ) {
-        $skill = Levels::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
-        $skill->update([
-            "is_active" => !$skill->is_active
+        $level = Levels::find( $id );
+        if( !$level ) return $this->responses->jsonNotFound( ["level"=>__('api.level.not_found')] );
+
+        $level->update([
+            "is_active" => !$level->is_active
         ]);
-        return $this->responses->jsonSuccess( $skill );
+        return $this->responses->jsonSuccess( $level );
     }
 }

@@ -20,52 +20,40 @@ class LogicProgrammingLanguagesController extends Controller
     }
     public function all() {
         $program_lang = ProgrammingLanguages::all();
-        if( count($program_lang) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($program_lang) == 0 ) return $this->responses->jsonValidationError( ["program_lang"=>__('api.program_lang.no_registered')] );
         return $this->responses->jsonSuccess( $program_lang );
     }
     public function getActive() {
         $program_lang = ProgrammingLanguages::whereIsActive( true )->get();
-        if( count($program_lang) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($program_lang) == 0 ) return $this->responses->jsonValidationError( ["program_lang"=>__('api.program_lang.no_active')] );
         return $this->responses->jsonSuccess( $program_lang );
     }
     public function find( $id ) {
-        $skill = ProgrammingLanguages::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
-        return $this->responses->jsonSuccess( $skill );
+        $pm = ProgrammingLanguages::find( $id );
+        if( !$pm ) return $this->responses->jsonNotFound( ["program_lang"=>__('api.program_lang.not_found')] );
+        return $this->responses->jsonSuccess( $pm );
     }
     public function create( Request $request ) {
         $validate = $this->rules->validateCreate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
         return $this->responses->jsonSuccess( ProgrammingLanguages::create($request->all()) );
     }
     public function update( $id, Request $request ) {
-        $skill = ProgrammingLanguages::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
+        $pm = ProgrammingLanguages::find( $id );
+        if( !$pm ) return $this->responses->jsonNotFound( ["program_lang"=>__('api.program_lang.not_found')] );
+
         $validate = $this->rules->validateUpdate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
-        $skill->update($request->all());
-        return $skill;
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
+
+        $pm->update($request->all());
+        return $pm;
     }
     public function changeStatus( $id ) {
-        $skill = ProgrammingLanguages::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
-        $skill->update([
-            "is_active" => !$skill->is_active
+        $pm = ProgrammingLanguages::find( $id );
+        if( !$pm ) return $this->responses->jsonNotFound( ["program_lang"=>__('api.program_lang.not_found')] );
+        $pm->update([
+            "is_active" => !$pm->is_active
         ]);
-        return $this->responses->jsonSuccess( $skill );
+        return $this->responses->jsonSuccess( $pm );
     }
 }

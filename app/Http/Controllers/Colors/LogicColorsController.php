@@ -19,52 +19,41 @@ class LogicColorsController extends Controller {
     }
     public function all() {
         $color = Colors::all();
-        if( count($color) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($color) == 0 ) return $this->responses->jsonValidationError( ["color"=>__('api.color.no_registered')] );
         return $this->responses->jsonSuccess( $color );
     }
     public function getActive() {
         $color = Colors::whereIsActive( true )->get();
-        if( count($color) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($color) == 0 ) return $this->responses->jsonValidationError( ["color"=>__('api.color.no_active')] );
         return $this->responses->jsonSuccess( $color );
     }
     public function find( $id ) {
-        $skill = Colors::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
-        return $this->responses->jsonSuccess( $skill );
+        $color = Colors::find( $id );
+        if( !$color ) return $this->responses->jsonNotFound( ["color"=>__('api.color.not_found')] );
+        return $this->responses->jsonSuccess( $color );
     }
     public function create( Request $request ) {
         $validate = $this->rules->validateCreate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
         return $this->responses->jsonSuccess( Colors::create($request->all()) );
     }
     public function update( $id, Request $request ) {
-        $skill = Colors::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
+        $color = Colors::find( $id );
+        if( !$color ) return $this->responses->jsonNotFound( ["color"=>__('api.color.not_found')] );
+
         $validate = $this->rules->validateUpdate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
-        $skill->update($request->all());
-        return $skill;
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
+
+        $color->update($request->all());
+        return $color;
     }
     public function changeStatus( $id ) {
-        $skill = Colors::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
-        $skill->update([
-            "is_active" => !$skill->is_active
+        $color = Colors::find( $id );
+        if( !$color ) return $this->responses->jsonNotFound( ["color"=>__('api.color.not_found')] );
+
+        $color->update([
+            "is_active" => !$color->is_active
         ]);
-        return $this->responses->jsonSuccess( $skill );
+        return $this->responses->jsonSuccess( $color );
     }
 }

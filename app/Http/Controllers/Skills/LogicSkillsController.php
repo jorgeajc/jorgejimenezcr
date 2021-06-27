@@ -20,49 +20,38 @@ class LogicSkillsController extends Controller {
     }
     public function all() {
         $skills = Skills::all();
-        if( count($skills) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($skills) == 0 ) return $this->responses->jsonValidationError( ["skill"=>__('api.skills.no_registered')] );
         return $this->responses->jsonSuccess( $skills );
     }
     public function getActive() {
         $skills = Skills::whereIsActive( true )->get();
-        if( count($skills) == 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($skills) == 0 ) return $this->responses->jsonValidationError( ["skill"=>__('api.skills.no_active')] );
         return $this->responses->jsonSuccess( $skills );
     }
     public function find( $id ) {
         $skill = Skills::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
+        if( !$skill ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
         return $this->responses->jsonSuccess( $skill );
     }
     public function create( Request $request ) {
         $validate = $this->rules->validateCreate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
         return $this->responses->jsonSuccess( Skills::create($request->all()) );
     }
     public function update( $id, Request $request ) {
         $skill = Skills::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
+        if( !$skill ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
+
         $validate = $this->rules->validateUpdate($request);
-        if( count($validate) > 0 ) {
-            return $this->responses->jsonValidationError( $validate );
-        }
+        if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
+
         $skill->update($request->all());
         return $skill;
     }
     public function changeStatus( $id ) {
         $skill = Skills::find( $id );
-        if( !$skill ) {
-            return $this->responses->jsonNotFound( ["skill"=>"Skill not found"] );
-        }
+        if( !$skill ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
+
         $skill->update([
             "is_active" => !$skill->is_active
         ]);

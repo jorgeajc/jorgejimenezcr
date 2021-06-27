@@ -18,6 +18,7 @@ class SetLocale
         if ($locale = $this->parseLocale($request)) {
             app()->setLocale($locale);
         }
+        // app()->setLocale('es');
 
         return $next($request);
     }

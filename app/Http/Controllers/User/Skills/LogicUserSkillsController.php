@@ -22,16 +22,14 @@ class LogicUserSkillsController extends Controller
 
     public function all( Request $request ) {
         $user = Auth::user();
-
-        if( count($user->skills) == 0 ) return $this->responses->jsonNotFound(["user" => "User not has the skill"]);
-
+        if( count($user->skills) == 0 ) return $this->responses->jsonNotFound( ["user" => __('api.user.skills.not_has') ]);
         return $this->responses->jsonSuccess( $user->skills );
     }
     public function find( $skill_id ){
         $user = Auth::user();
 
         $skill = $this->userHasSkill($user, $skill_id);
-        if( !$skill ) return $this->responses->jsonNotFound(["user" => "User not has the skill"]);
+        if( !$skill ) return $this->responses->jsonNotFound(["user" => __('api.user.skills.not_found')]);
 
         return $this->responses->jsonSuccess( $skill );
     }
@@ -41,13 +39,12 @@ class LogicUserSkillsController extends Controller
 
         $skill_id = $request->skill_id;
 
-        $user = Auth::user();
         $skill = Skills::find( $skill_id );
+        if( !$skill ) return $this->responses->jsonNotFound(["skill" => __('api.user.skills.not_found')]);
 
-        if( !$skill ) return $this->responses->jsonNotFound(["skill" => "Skill not found"]);
-
+        $user = Auth::user();
         $hasSkill = $this->userHasSkill($user, $skill->id);
-        if( $hasSkill ) return $this->responses->jsonNotFound(["user" => "User already has the skill"]);
+        if( $hasSkill ) return $this->responses->jsonNotFound(["user" => __('api.user.skills.has')]);
 
         $user->skills()->attach($skill);
         return $this->responses->jsonSuccess( $user->skills );
@@ -56,24 +53,24 @@ class LogicUserSkillsController extends Controller
         $user = Auth::user();
 
         $hasSkill = $this->userHasSkill($user, $skill_id);
-        if( !$hasSkill )  return $this->responses->jsonNotFound( ["user" => "User not has the skill"]);
+        if( !$hasSkill )  return $this->responses->jsonNotFound( ["user" => __('api.user.skills.not_find')]);
 
         $user->skills()->detach([$skill_id]);
         $skills = $user->skills;
 
         if( count($skills) > 0 ) return $this->responses->jsonSuccess(  $skills );
-        return $this->responses->jsonSuccess(  ["user" => "User not has the skills"] );
+        return $this->responses->jsonSuccess(  ["user" => __('api.user.skills.not_has')] );
     }
     public function changeStatus( $skill_id ) {
         $user = Auth::user();
 
         $skill = $this->userHasSkill($user, $skill_id);
-        if( !$skill ) return $this->responses->jsonNotFound( ["user" => "User not has the skill"] );
+        if( !$skill ) return $this->responses->jsonNotFound( ["user" => __('api.user.skills.not_find')] );
 
         $update = $user->skills()->updateExistingPivot($skill->id, [
             "is_active" => !$skill->pivot->is_active
         ]);
-        if( !$update ) return $this->responses->jsonNotFound( ["user" => "User not has the skill"] );
+        if( !$update ) return $this->responses->jsonNotFound( ["user" => __('api.user.skills.error')] );
 
         return $this->responses->jsonSuccess( $skill );
     }
