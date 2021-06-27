@@ -6,7 +6,6 @@ use App\Models\User;
 use Tests\Browser\Pages\Home;
 use Tests\Browser\Pages\Register;
 use Tests\DuskTestCase;
-use Carbon\Carbon;
 
 class RegisterTest extends DuskTestCase
 {
@@ -28,15 +27,6 @@ class RegisterTest extends DuskTestCase
                     'password' => 'password',
                     'password_confirmation' => 'password',
 
-                    'last_name' => "Test",
-                    'whatsapp'  => "Test",
-                    'birthday'  => Carbon::parse('02-10-1998'),
-                    'facebook_id'  => null,
-                    'google_id' => null,
-                    'country'   => "Test",
-                    'address'   => "Test",
-                    'about_me'  => "Test",
-                    'my_carrer'  => "Test",
                     'is_active' => true
                 ])
                 ->assertPageIs(Home::class);
