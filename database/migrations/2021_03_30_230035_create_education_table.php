@@ -22,9 +22,11 @@ class CreateEducationTable extends Migration
             $table->integer('end_year')->nullable();
             $table->string('status');
             $table->boolean('is_active')->default(true);
-            $table->timestamps();
 
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            
+            $table->timestamps();
         });
     }
 

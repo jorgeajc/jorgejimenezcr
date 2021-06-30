@@ -17,10 +17,15 @@ class CreateSocialMediaTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
-            $table->integer('user_id');
             $table->boolean('is_active')->default(true);
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('color_id');
+            $table->foreign('color_id')->references('id')->on('colors');
+
             $table->timestamps();
-            $table->integer('color_id');
         });
     }
 

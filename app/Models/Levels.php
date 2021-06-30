@@ -11,7 +11,7 @@ class Levels extends Model {
         'name',
         'is_active'
     ];
-    public function skills() {
-        return $this->hasMany(Skills::class);
+    public function programmingLanguages() {
+        return $this->belongsToMany(ProgrammingLanguages::class, 'users_programming_languages', 'level_id')->withPivot('user_id', 'programming_languages_id', 'level_id', 'percentage', 'year_experience', 'is_active');
     }
 }
