@@ -58,5 +58,11 @@ return [
             'has'           => 'Usuario ya tiene esta experiencia',
             'error'         => 'Error de edición',
         ],
+        'level' => [
+            'not_found'     => 'Niveles no encontrada',
+            'no_registered' => 'No hay nivel registradas',
+            'no_active'     => 'No hay niveles activos',
+            'error'         => 'Error de edición',
+        ],
     ]
 ];

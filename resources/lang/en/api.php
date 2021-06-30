@@ -58,5 +58,11 @@ return [
             'has'             => 'User already has this experience',
             'error'           => 'Edition error',
         ],
+        'level' => [
+            'not_found'       => 'Level not found',
+            'no_registered'   => 'No registered level',
+            'no_active'       => 'No level active',
+            'error'           => 'Edition error',
+        ],
     ]
 ];

@@ -8,6 +8,7 @@ use App\Http\Controllers\HandlerResponses\HandlerResponsesController;
 
 use Illuminate\Http\Request;
 use App\Models\ProgrammingLanguages;
+use App\Models\Levels;
 use Auth;
 
 class LogicUserProgramLangController extends Controller
@@ -37,9 +38,10 @@ class LogicUserProgramLangController extends Controller
         $validate = $this->rules->validateCreate($request);
         if( count($validate) > 0 ) return $this->responses->jsonValidationError( $validate );
 
-        $prog_lang_id = $request->programming_lang_id;
-        $percentage = $request->percentage;
-        $year_experience = $request->year_experience;
+        $prog_lang_id   = $request->programming_lang_id;
+        $level_id       = $request->level_id;
+        $percentage     = $request->percentage;
+        $year_experience= $request->year_experience;
 
         $user = Auth::user();
 
@@ -48,13 +50,25 @@ class LogicUserProgramLangController extends Controller
         $prog_lang = ProgrammingLanguages::find( $prog_lang_id );
         if( !$prog_lang ) return $this->responses->jsonNotFound(["programming_languages" => __('api.user.program_lang.not_found')]);
 
+        $level = Levels::find( $level_id );
+        if( !$level ) return $this->responses->jsonNotFound(["level" => __('api.user.level.not_found')]);
+
         $hasProgLang = $this->userHasProgramLangs($user, $prog_lang->id);
         if( $hasProgLang ) return $this->responses->jsonNotFound(["user" => __('api.user.program_lang.has')]);
 
-        $user->programmingLanguages()->attach($prog_lang, [
-            'percentage'  => $percentage,
-	        'year_experience'  => $year_experience
-        ]);
+        /* $entities = [ 'programming_languages_id'  => $prog_lang->id, 'level_id'  => $level->id ];
+        $pivots = [ 'percentage'  => $percentage, 'year_experience'  => $year_experience ];
+        $combination = $user->combinePivot($entities, $pivots);
+        $user->programmingLanguages()->sync($combination); */
+
+        $user->programmingLanguages()->attach(
+            $prog_lang->id,
+            [
+                'level_id'  => $level->id,
+                'percentage'  => $percentage,
+                'year_experience'  => $year_experience,
+            ]
+        );
         return $this->responses->jsonSuccess( $user->programmingLanguages );
     }
     public function remove($prog_lang_id) {
