@@ -5,6 +5,7 @@ return [
         'not_found'     => 'Habilidad no encontrada',
         'no_registered' => 'No hay habilidades registrados',
         'no_active'     => 'No hay habilidades activos',
+        'delete_failed' => 'Error al eliminar',
     ],
     'color' => [
         'not_found'     => 'Color no encontrado',

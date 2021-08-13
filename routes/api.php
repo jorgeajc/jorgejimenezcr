@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('skills/{id}', [LogicSkillsController::class, "find"]);
         Route::post('skills', [LogicSkillsController::class, "create"]);
         Route::put('skills/{id}', [LogicSkillsController::class, "update"]);
+        Route::delete('skills/{id}', [LogicSkillsController::class, "delete"]);
         Route::patch('skills/{id}/status', [LogicSkillsController::class, "changeStatus"]);
 
         /**
@@ -127,7 +128,7 @@ Route::group(['middleware' => 'auth:api'], function () {
             Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
             Route::patch('experiences/{e_id}', [LogicExperiencesController::class, "changeStatus"]);
         });
-   });
+    });
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

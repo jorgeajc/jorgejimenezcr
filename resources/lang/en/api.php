@@ -5,6 +5,7 @@ return [
         'not_found'       => 'Skill not found',
         'no_registered'   => 'No registered skills',
         'no_active'       => 'No skills active',
+        'delete_failed'   => 'Error to delete',
     ],
     'color' => [
         'not_found'       => 'Color not found',
