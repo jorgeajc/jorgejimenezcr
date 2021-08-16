@@ -3,18 +3,26 @@
     <div class="form-group row">
       <div class="col-md-6 col-12">
         <div class="col-12">
-          <input type="text" v-model="newForm.name">
-          <button v-on:click="addSkill" :disabled="newForm.disabled">Create</button>
+          <b-input-group prepend="name" class="mt-3">
+            <b-form-input type="text" v-model="newForm.name"></b-form-input>
+            <b-input-group-append>
+              <b-button variant="info" @click="addSkill" :disabled="newForm.disabled">Create</b-button>
+            </b-input-group-append>
+          </b-input-group>
         </div>
         <div class="col-12">
-          <span v-if="errors.add.error"> {{ errors.add.error }}</span>
+          <b-alert :show="showDismissibleAlert" @dismissed="clearError('add')" variant="danger" dismissible>{{ errors.add.error }}</b-alert>
         </div>
       </div>
       <div class="col-md-6 col-12" v-if="editForm.update">
         <div class="col-12">
-          <input type="text" v-model="editForm.name">
-          <button v-on:click="updateSkill" :disabled="editForm.disabled">update</button>
-          <button v-on:click="setValueEditForm" :disabled="editForm.disabled">x</button>
+          <b-input-group prepend="name" class="mt-3">
+            <b-form-input type="text" v-model="editForm.name"></b-form-input>
+            <b-input-group-append>
+              <b-button variant="info" @click="updateSkill" :disabled="editForm.disabled">update</b-button>
+              <b-button variant="info" @click="setValueEditForm" :disabled="editForm.disabled">x</b-button>
+            </b-input-group-append>
+          </b-input-group>
         </div>
         <div class="col-12">
           <span v-if="errors.edit.error"> {{ errors.edit.error }}</span>
@@ -23,11 +31,65 @@
     </div>
     <div class="form-group row">
       <div class="col-md-12 ml-md-auto">
-        <table class="table table-striped">
+        <b-pagination
+          v-model="skillTable.currentPage"
+          :total-rows="skills.length"
+          :per-page="skillTable.perPage"
+          aria-controls="my-table"
+        ></b-pagination>
+        <p class="mt-3">Current Page: {{ skillTable.currentPage }}</p>
+        <b-table
+          id="my-table"
+          :items="skills"
+          :per-page="skillTable.perPage"
+          :current-page="skillTable.currentPage"
+          :fields="skillTable.fields"
+          small
+        >
+          <template #cell(is_active)="data">
+            <div class="switch-field">
+              <input type="radio" value="1"
+                v-model="data.item.is_active"
+                :checked="data.item.is_active"
+                v-on:change="editStatus(data.item.id)"
+                :disabled="data.item.disabled"
+                v-bind:name="'status'+data.item.id"
+                v-bind:id="'act'+data.item.id"
+                />
+              <label v-bind:for="'act'+data.item.id">Yes</label>
+              <input type="radio" value="0"
+                v-model="data.item.is_active"
+                :checked="!data.item.is_active"
+                v-on:change="editStatus(data.item.id)"
+                :disabled="data.item.disabled"
+                v-bind:name="'status'+data.item.id"
+                v-bind:id="'inac'+data.item.id"
+                />
+              <label v-bind:for="'inac'+data.item.id">No</label>
+            </div>
+          </template>
+
+          <template #cell(created_at)="data">
+            <div> {{ data.item.created_at}} </div>
+          </template>
+
+          <template #cell(actions)="data">
+            <b-button size="sm" @click="edit(data.item)" class="mr-1">
+              update
+            </b-button>
+            <b-button size="sm" @click="deleteSkill(data.item)">
+              delete
+            </b-button>
+          </template>
+        </b-table>
+      </div>
+      <div class="col-md-12 ml-md-auto">
+        <!-- <table class="table table-striped">
           <thead>
             <tr>
-              <th>name</th>
+              <th>Name</th>
               <th>Active</th>
+              <th colspan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -63,7 +125,7 @@
               </th>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
   </card>
@@ -71,14 +133,22 @@
 
 <script>
   import Form from 'vform'
-
+  import { BPagination, BTable, BButton, BInputGroup, BFormInput, BAlert, BInputGroupAppend  } from 'bootstrap-vue'
   export default {
     scrollToTop: false,
 
     metaInfo () {
       return { title: this.$t('settings') }
     },
-
+    components: {
+      bTable: BTable,
+      bPagination: BPagination,
+      bButton: BButton,
+      bInputGroup: BInputGroup,
+      bInputGroupAppend: BInputGroupAppend,
+      bFormInput: BFormInput,
+      bAlert: BAlert,
+    },
     data: () => ({
       form: new Form(),
       newForm: new Form({
@@ -102,8 +172,18 @@
           "error": null
         }
       },
+      skillTable: {
+        perPage: 5,
+        currentPage: 1,
+        fields: [
+          'name',
+          'is_active',
+          'created_at',
+          'actions' // this is a virtual column, that does not exist in our `items`
+        ]
+      },
+      showDismissibleAlert: false
     }),
-
     methods: {
       async getAll () {
         this.hasSkills = await this.form.get('/api/logic/skills')
@@ -165,9 +245,11 @@
 
       setErrors( method, error ){
         this.errors[method].error= error
+        this.setShowDismissibleAlert(true)
       },
       clearError( method ) {
         this.errors[method].error = null
+        this.setShowDismissibleAlert(false)
       },
 
       setValueNewForm( name = "", disabled = false ) {
@@ -179,6 +261,10 @@
         this.editForm.id = id
         this.editForm.update = update
         this.editForm.disabled = disabled
+      },
+
+      setShowDismissibleAlert( boolean ){
+        this.showDismissibleAlert = boolean;
       },
 
       isArrayOrObject(array) {
@@ -193,6 +279,8 @@
     },
     mounted() {
       this.getAll()
+    },
+    computed: {
     }
   }
 </script>
