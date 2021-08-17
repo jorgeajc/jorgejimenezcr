@@ -61,7 +61,7 @@ class LogicSkillsController extends Controller {
         $skill = Skills::find( $id );
         if( !$skill ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
         if( $skill->color ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
-        if( $skill->color || $skill->users || $skill->level ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.delete_failed')] );
+        if( $skill->color || (count($skill->users) > 0) || $skill->level ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.delete_failed')] );
         $skill->delete();
         return $this->responses->jsonSuccess( $skill );
     }

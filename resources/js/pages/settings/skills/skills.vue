@@ -48,84 +48,50 @@
         >
           <template #cell(is_active)="data">
             <div class="switch-field">
-              <input type="radio" value="1"
+              <input
+                type="radio"
+                value="1"
                 v-model="data.item.is_active"
-                :checked="data.item.is_active"
                 v-on:change="editStatus(data.item.id)"
-                :disabled="data.item.disabled"
                 v-bind:name="'status'+data.item.id"
                 v-bind:id="'act'+data.item.id"
+                :disabled="data.item.disabled"
+                :checked="data.item.is_active"
                 />
               <label v-bind:for="'act'+data.item.id">Yes</label>
-              <input type="radio" value="0"
+              <input
+                type="radio"
+                value="0"
                 v-model="data.item.is_active"
-                :checked="!data.item.is_active"
                 v-on:change="editStatus(data.item.id)"
-                :disabled="data.item.disabled"
                 v-bind:name="'status'+data.item.id"
                 v-bind:id="'inac'+data.item.id"
+                :checked="!data.item.is_active"
+                :disabled="data.item.disabled"
                 />
               <label v-bind:for="'inac'+data.item.id">No</label>
             </div>
           </template>
 
           <template #cell(created_at)="data">
-            <div> {{ data.item.created_at}} </div>
+            <div> {{ data.item.created_at }} </div>
           </template>
 
           <template #cell(actions)="data">
-            <b-button size="sm" @click="edit(data.item)" class="mr-1">
+            <b-button size="sm" @click="edit(data.item)" class="mr-1" variant="info">
               update
             </b-button>
-            <b-button size="sm" @click="deleteSkill(data.item)">
+            <b-button size="sm" @click="deleteSkill(data.item)" variant="info">
               delete
             </b-button>
           </template>
         </b-table>
-      </div>
-      <div class="col-md-12 ml-md-auto">
-        <!-- <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Active</th>
-              <th colspan="2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(skill,i) in skills" :key="i">
-              <th scope="row">{{ skill.name }}</th>
-              <th scope="row">
-                <div class="switch-field">
-                  <input type="radio" value="1"
-                    v-model="skill.is_active"
-                    :checked="skill.is_active"
-                    v-on:change="editStatus(skill.id)"
-                    :disabled="skill.disabled"
-                    v-bind:name="'status'+skill.id"
-                    v-bind:id="'act'+skill.id"
-                    />
-                  <label v-bind:for="'act'+skill.id">Yes</label>
-                  <input type="radio" value="0"
-                    v-model="skill.is_active"
-                    :checked="!skill.is_active"
-                    v-on:change="editStatus(skill.id)"
-                    :disabled="skill.disabled"
-                    v-bind:name="'status'+skill.id"
-                    v-bind:id="'inac'+skill.id"
-                    />
-                  <label v-bind:for="'inac'+skill.id">No</label>
-                </div>
-              </th>
-              <th>
-                <button v-on:click="edit(skill)">update</button>
-              </th>
-               <th>
-                <button v-on:click="deleteSkill(skill)">delete</button>
-              </th>
-            </tr>
-          </tbody>
-        </table> -->
+        <b-pagination
+          v-model="skillTable.currentPage"
+          :total-rows="skills.length"
+          :per-page="skillTable.perPage"
+          aria-controls="my-table"
+        ></b-pagination>
       </div>
     </div>
   </card>
