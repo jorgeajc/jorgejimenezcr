@@ -11,7 +11,7 @@
           </b-input-group>
         </div>
         <div class="col-12">
-          <b-alert :show="showDismissibleAlert" @dismissed="clearError('add')" variant="danger" dismissible>{{ errors.add.error }}</b-alert>
+          <b-alert :show="errors.add.showDismissibleAlert" @dismissed="clearError('add')" variant="danger" dismissible>{{ errors.add.error }}</b-alert>
         </div>
       </div>
       <div class="col-md-6 col-12" v-if="editForm.update">
@@ -25,7 +25,7 @@
           </b-input-group>
         </div>
         <div class="col-12">
-          <span v-if="errors.edit.error"> {{ errors.edit.error }}</span>
+          <b-alert :show="errors.edit.showDismissibleAlert" @dismissed="clearError('edit')" variant="danger" dismissible>{{ errors.edit.error }}</b-alert>
         </div>
       </div>
     </div>
@@ -133,9 +133,11 @@
       errors: {
         "add": {
           "error": null,
+          showDismissibleAlert: false
         },
         "edit": {
-          "error": null
+          "error": null,
+          showDismissibleAlert: false
         }
       },
       skillTable: {
@@ -148,7 +150,6 @@
           'actions' // this is a virtual column, that does not exist in our `items`
         ]
       },
-      showDismissibleAlert: false
     }),
     methods: {
       async getAll () {
@@ -211,11 +212,11 @@
 
       setErrors( method, error ){
         this.errors[method].error= error
-        this.setShowDismissibleAlert(true)
+        this.setShowDismissibleAlert( method, true)
       },
       clearError( method ) {
         this.errors[method].error = null
-        this.setShowDismissibleAlert(false)
+        this.setShowDismissibleAlert( method, false)
       },
 
       setValueNewForm( name = "", disabled = false ) {
@@ -229,8 +230,8 @@
         this.editForm.disabled = disabled
       },
 
-      setShowDismissibleAlert( boolean ){
-        this.showDismissibleAlert = boolean;
+      setShowDismissibleAlert( method, boolean ){
+        this.errors[method].showDismissibleAlert = boolean;
       },
 
       isArrayOrObject(array) {
