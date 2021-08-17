@@ -37,7 +37,6 @@
           :per-page="skillTable.perPage"
           aria-controls="my-table"
         ></b-pagination>
-        <p class="mt-3">Current Page: {{ skillTable.currentPage }}</p>
         <b-table
           id="my-table"
           :items="skills"
@@ -99,7 +98,8 @@
 
 <script>
   import Form from 'vform'
-  import { BPagination, BTable, BButton, BInputGroup, BFormInput, BAlert, BInputGroupAppend  } from 'bootstrap-vue'
+  import { BPagination, BTable, BButton, BInputGroup, BFormInput, BAlert, BInputGroupAppend, BootstrapVue  } from 'bootstrap-vue'
+
   export default {
     scrollToTop: false,
 
@@ -114,6 +114,7 @@
       bInputGroupAppend: BInputGroupAppend,
       bFormInput: BFormInput,
       bAlert: BAlert,
+      BootstrapVue: BootstrapVue,
     },
     data: () => ({
       form: new Form(),
@@ -143,11 +144,17 @@
       skillTable: {
         perPage: 5,
         currentPage: 1,
-        fields: [
-          'name',
-          'is_active',
-          'created_at',
-          'actions' // this is a virtual column, that does not exist in our `items`
+        fields: [{
+            key: 'name',
+            sortable: true
+          },{
+            key: 'is_active'
+          },{
+            key: 'created_at',
+            sortable: true
+          },{
+            key: 'actions'
+          }
         ]
       },
     }),
@@ -242,7 +249,7 @@
           array = this.isArrayOrObject(array[Object.keys(array)[0]])
         }
         return array
-      }
+      },
     },
     mounted() {
       this.getAll()
