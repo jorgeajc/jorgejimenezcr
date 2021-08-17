@@ -107,14 +107,14 @@
       return { title: this.$t('settings') }
     },
     components: {
-      bTable: BTable,
-      bPagination: BPagination,
-      bButton: BButton,
-      bInputGroup: BInputGroup,
-      bInputGroupAppend: BInputGroupAppend,
-      bFormInput: BFormInput,
-      bAlert: BAlert,
-      BootstrapVue: BootstrapVue,
+      BTable,
+      BPagination,
+      BButton,
+      BInputGroup,
+      BInputGroupAppend,
+      BFormInput,
+      BAlert,
+      BootstrapVue,
     },
     data: () => ({
       form: new Form(),
