@@ -3,12 +3,19 @@
     <div class="form-group row">
       <div class="col-md-6 col-12">
         <div class="col-12">
-          <b-input-group prepend="name" class="mt-3">
-            <b-form-input type="text" v-model="newForm.name"></b-form-input>
-            <b-input-group-append>
-              <b-button variant="info" @click="addSkill" :disabled="newForm.disabled">Create</b-button>
-            </b-input-group-append>
-          </b-input-group>
+          <form @submit.prevent="addSkill">
+            <b-input-group prepend="name" class="mt-3">
+                <b-form-input type="text" v-model="newForm.name"></b-form-input>
+                <b-input-group-append>
+                  <v-button
+                    :type="info"
+                    :nativeType="submit"
+                    :disabled="newForm.disabled"
+                    :loading="newForm.disabled"
+                  >Create</v-button>
+                </b-input-group-append>
+            </b-input-group>
+          </form>
         </div>
         <div class="col-12">
           <b-alert :show="errors.add.showDismissibleAlert" @dismissed="clearError('add')" variant="danger" dismissible>{{ errors.add.error }}</b-alert>
@@ -16,13 +23,23 @@
       </div>
       <div class="col-md-6 col-12" v-if="editForm.update">
         <div class="col-12">
-          <b-input-group prepend="name" class="mt-3">
-            <b-form-input type="text" v-model="editForm.name"></b-form-input>
-            <b-input-group-append>
-              <b-button variant="info" @click="updateSkill" :disabled="editForm.disabled">update</b-button>
-              <b-button variant="info" @click="setValueEditForm" :disabled="editForm.disabled">x</b-button>
-            </b-input-group-append>
-          </b-input-group>
+            <b-input-group prepend="name" class="mt-3">
+              <b-form-input type="text" v-model="editForm.name"></b-form-input>
+              <b-input-group-append>
+                <form @submit.prevent="updateSkill">
+                  <v-button
+                    :type="info"
+                    :disabled="editForm.disabled"
+                    :loading="editForm.disabled"
+                  >update</v-button>
+                </form>
+                <form @submit.prevent="setValueEditForm">
+                  <v-button
+                    :disabled="editForm.disabled"
+                  >x</v-button>
+                </form>
+              </b-input-group-append>
+            </b-input-group>
         </div>
         <div class="col-12">
           <b-alert :show="errors.edit.showDismissibleAlert" @dismissed="clearError('edit')" variant="danger" dismissible>{{ errors.edit.error }}</b-alert>
@@ -77,12 +94,22 @@
           </template>
 
           <template #cell(actions)="data">
-            <b-button size="sm" @click="edit(data.item)" class="mr-1" variant="info">
-              update
-            </b-button>
-            <b-button size="sm" @click="deleteSkill(data.item)" variant="info">
-              delete
-            </b-button>
+            <div class="row">
+              <div class="col-6 pr-sm-0">
+                <form @submit.prevent="edit(data.item)">
+                  <v-button
+                    :type="info"
+                  >update</v-button>
+                </form>
+              </div>
+              <div class="col-6 pl-sm-0">
+                <form @submit.prevent="deleteSkill(data.item)">
+                  <v-button
+                    :type="danger"
+                  >delete</v-button>
+                </form>
+              </div>
+            </div>
           </template>
         </b-table>
         <b-pagination
@@ -94,11 +121,12 @@
       </div>
     </div>
   </card>
+
 </template>
 
 <script>
   import Form from 'vform'
-  import { BPagination, BTable, BButton, BInputGroup, BFormInput, BAlert, BInputGroupAppend, BootstrapVue  } from 'bootstrap-vue'
+  import { BPagination, BTable, BInputGroup, BFormInput, BAlert, BInputGroupAppend, BootstrapVue  } from 'bootstrap-vue'
 
   export default {
     scrollToTop: false,
@@ -109,7 +137,6 @@
     components: {
       BTable,
       BPagination,
-      BButton,
       BInputGroup,
       BInputGroupAppend,
       BFormInput,
