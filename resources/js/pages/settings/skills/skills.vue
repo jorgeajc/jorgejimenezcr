@@ -8,8 +8,6 @@
                 <b-form-input type="text" v-model="newForm.name"></b-form-input>
                 <b-input-group-append>
                   <v-button
-                    :type="info"
-                    :nativeType="submit"
                     :disabled="newForm.disabled"
                     :loading="newForm.disabled"
                   >Create</v-button>
@@ -28,7 +26,6 @@
               <b-input-group-append>
                 <form @submit.prevent="updateSkill">
                   <v-button
-                    :type="info"
                     :disabled="editForm.disabled"
                     :loading="editForm.disabled"
                   >update</v-button>
@@ -97,16 +94,12 @@
             <div class="row">
               <div class="col-6 pr-sm-0">
                 <form @submit.prevent="edit(data.item)">
-                  <v-button
-                    :type="info"
-                  >update</v-button>
+                  <v-button>update</v-button>
                 </form>
               </div>
               <div class="col-6 pl-sm-0">
                 <form @submit.prevent="deleteSkill(data.item)">
-                  <v-button
-                    :type="danger"
-                  >delete</v-button>
+                  <v-button>delete</v-button>
                 </form>
               </div>
             </div>
@@ -126,7 +119,7 @@
 
 <script>
   import Form from 'vform'
-  import { BPagination, BTable, BInputGroup, BFormInput, BAlert, BInputGroupAppend, BootstrapVue  } from 'bootstrap-vue'
+  import { BTable, BInputGroup, BFormInput, BAlert, BInputGroupAppend, BootstrapVue, BPagination  } from 'bootstrap-vue'
 
   export default {
     scrollToTop: false,
@@ -136,12 +129,12 @@
     },
     components: {
       BTable,
-      BPagination,
       BInputGroup,
       BInputGroupAppend,
       BFormInput,
       BAlert,
       BootstrapVue,
+      BPagination,
     },
     data: () => ({
       form: new Form(),
