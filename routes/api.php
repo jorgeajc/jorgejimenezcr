@@ -39,95 +39,93 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/profile', [ProfileController::class, 'update']);
     Route::patch('settings/password', [PasswordController::class, 'update']);
 
-    Route::group(['prefix' => 'logic'],function (){
+    /**
+     * apis skill
+     */
+    Route::get('skills', [LogicSkillsController::class, "all"]);
+    Route::get('skills/active', [LogicSkillsController::class, "getActive"]);
+    Route::get('skills/{id}', [LogicSkillsController::class, "find"]);
+    Route::post('skills', [LogicSkillsController::class, "create"]);
+    Route::put('skills/{id}', [LogicSkillsController::class, "update"]);
+    Route::delete('skills/{id}', [LogicSkillsController::class, "delete"]);
+    Route::patch('skills/{id}/status', [LogicSkillsController::class, "changeStatus"]);
+
+    /**
+     * apis Colors
+     */
+    Route::get('colors', [LogicColorsController::class, "all"]);
+    Route::get('colors/active', [LogicColorsController::class, "getActive"]);
+    Route::get('colors/{id}', [LogicColorsController::class, "find"]);
+    Route::post('colors', [LogicColorsController::class, "create"]);
+    Route::put('colors/{id}', [LogicColorsController::class, "update"]);
+    Route::patch('colors/{id}/status', [LogicColorsController::class, "changeStatus"]);
+
+    /**
+     * apis Programming languages
+     */
+    Route::get('programming/languages', [LogicProgrammingLanguagesController::class, "all"]);
+    Route::get('programming/languages/active', [LogicProgrammingLanguagesController::class, "getActive"]);
+    Route::get('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "find"]);
+    Route::post('programming/languages', [LogicProgrammingLanguagesController::class, "create"]);
+    Route::put('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "update"]);
+    Route::patch('programming/languages/{id}/status', [LogicProgrammingLanguagesController::class, "changeStatus"]);
+
+    /**
+     * apis Programming languages
+     */
+    Route::get('level', [LogicLevelsController::class, "all"]);
+    Route::get('level/active', [LogicLevelsController::class, "getActive"]);
+    Route::get('level/{id}', [LogicLevelsController::class, "find"]);
+    Route::post('level', [LogicLevelsController::class, "create"]);
+    Route::put('level/{id}', [LogicLevelsController::class, "update"]);
+    Route::patch('level/{id}/status', [LogicLevelsController::class, "changeStatus"]);
+
+    Route::group(['prefix' => 'user'],function (){
         /**
-         * apis skill
+         * User skill
          */
-        Route::get('skills', [LogicSkillsController::class, "all"]);
-        Route::get('skills/active', [LogicSkillsController::class, "getActive"]);
-        Route::get('skills/{id}', [LogicSkillsController::class, "find"]);
-        Route::post('skills', [LogicSkillsController::class, "create"]);
-        Route::put('skills/{id}', [LogicSkillsController::class, "update"]);
-        Route::delete('skills/{id}', [LogicSkillsController::class, "delete"]);
-        Route::patch('skills/{id}/status', [LogicSkillsController::class, "changeStatus"]);
+        Route::get('skills', [LogicUserSkillsController::class, "all"]);
+        Route::get('skills/{s_id}', [LogicUserSkillsController::class, "find"]);
+        Route::post('skills', [LogicUserSkillsController::class, "create"]);
+        Route::delete('skills/{s_id}', [LogicUserSkillsController::class, "remove"]);
+        Route::patch('skills/{s_id}', [LogicUserSkillsController::class, "changeStatus"]);
 
         /**
-         * apis Colors
+         * apis user Programming languages
          */
-        Route::get('colors', [LogicColorsController::class, "all"]);
-        Route::get('colors/active', [LogicColorsController::class, "getActive"]);
-        Route::get('colors/{id}', [LogicColorsController::class, "find"]);
-        Route::post('colors', [LogicColorsController::class, "create"]);
-        Route::put('colors/{id}', [LogicColorsController::class, "update"]);
-        Route::patch('colors/{id}/status', [LogicColorsController::class, "changeStatus"]);
+
+        Route::get('programming/languages', [LogicUserProgramLangController::class, "all"]);
+        Route::get('programming/languages/{p_id}', [LogicUserProgramLangController::class, "find"]);
+        Route::post('programming/languages', [LogicUserProgramLangController::class, "create"]);
+        Route::delete('programming/languages/{p_id}', [LogicUserProgramLangController::class, "remove"]);
+        Route::patch('programming/languages/{p_id}', [LogicUserProgramLangController::class, "changeStatus"]);
 
         /**
-         * apis Programming languages
+         * apis user Social medias
          */
-        Route::get('programming/languages', [LogicProgrammingLanguagesController::class, "all"]);
-        Route::get('programming/languages/active', [LogicProgrammingLanguagesController::class, "getActive"]);
-        Route::get('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "find"]);
-        Route::post('programming/languages', [LogicProgrammingLanguagesController::class, "create"]);
-        Route::put('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "update"]);
-        Route::patch('programming/languages/{id}/status', [LogicProgrammingLanguagesController::class, "changeStatus"]);
+        Route::get('socials/medias', [LogicSocialsMediasController::class, "all"]);
+        Route::get('socials/medias/{s_id}', [LogicSocialsMediasController::class, "find"]);
+        Route::post('socials/medias', [LogicSocialsMediasController::class, "create"]);
+        Route::put('socials/medias/{s_id}', [LogicSocialsMediasController::class, "update"]);
+        Route::patch('socials/medias/{s_id}', [LogicSocialsMediasController::class, "changeStatus"]);
 
         /**
-         * apis Programming languages
+         * apis user educaction
          */
-        Route::get('level', [LogicLevelsController::class, "all"]);
-        Route::get('level/active', [LogicLevelsController::class, "getActive"]);
-        Route::get('level/{id}', [LogicLevelsController::class, "find"]);
-        Route::post('level', [LogicLevelsController::class, "create"]);
-        Route::put('level/{id}', [LogicLevelsController::class, "update"]);
-        Route::patch('level/{id}/status', [LogicLevelsController::class, "changeStatus"]);
+        Route::get('education', [LogicEducationsController::class, "all"]);
+        Route::get('education/{e_id}', [LogicEducationsController::class, "find"]);
+        Route::post('education', [LogicEducationsController::class, "create"]);
+        Route::put('education/{e_id}', [LogicEducationsController::class, "update"]);
+        Route::patch('education/{e_id}', [LogicEducationsController::class, "changeStatus"]);
 
-        Route::group(['prefix' => 'user'],function (){
-            /**
-             * User skill
-             */
-            Route::get('skills', [LogicUserSkillsController::class, "all"]);
-            Route::get('skills/{s_id}', [LogicUserSkillsController::class, "find"]);
-            Route::post('skills', [LogicUserSkillsController::class, "create"]);
-            Route::delete('skills/{s_id}', [LogicUserSkillsController::class, "remove"]);
-            Route::patch('skills/{s_id}', [LogicUserSkillsController::class, "changeStatus"]);
-
-            /**
-             * apis user Programming languages
-             */
-
-            Route::get('programming/languages', [LogicUserProgramLangController::class, "all"]);
-            Route::get('programming/languages/{p_id}', [LogicUserProgramLangController::class, "find"]);
-            Route::post('programming/languages', [LogicUserProgramLangController::class, "create"]);
-            Route::delete('programming/languages/{p_id}', [LogicUserProgramLangController::class, "remove"]);
-            Route::patch('programming/languages/{p_id}', [LogicUserProgramLangController::class, "changeStatus"]);
-
-            /**
-             * apis user Social medias
-             */
-            Route::get('socials/medias', [LogicSocialsMediasController::class, "all"]);
-            Route::get('socials/medias/{s_id}', [LogicSocialsMediasController::class, "find"]);
-            Route::post('socials/medias', [LogicSocialsMediasController::class, "create"]);
-            Route::put('socials/medias/{s_id}', [LogicSocialsMediasController::class, "update"]);
-            Route::patch('socials/medias/{s_id}', [LogicSocialsMediasController::class, "changeStatus"]);
-
-            /**
-             * apis user educaction
-             */
-            Route::get('education', [LogicEducationsController::class, "all"]);
-            Route::get('education/{e_id}', [LogicEducationsController::class, "find"]);
-            Route::post('education', [LogicEducationsController::class, "create"]);
-            Route::put('education/{e_id}', [LogicEducationsController::class, "update"]);
-            Route::patch('education/{e_id}', [LogicEducationsController::class, "changeStatus"]);
-
-            /**
-             * apis user educaction
-             */
-            Route::get('experiences', [LogicExperiencesController::class, "all"]);
-            Route::get('experiences/{e_id}', [LogicExperiencesController::class, "find"]);
-            Route::post('experiences', [LogicExperiencesController::class, "create"]);
-            Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
-            Route::patch('experiences/{e_id}', [LogicExperiencesController::class, "changeStatus"]);
-        });
+        /**
+         * apis user educaction
+         */
+        Route::get('experiences', [LogicExperiencesController::class, "all"]);
+        Route::get('experiences/{e_id}', [LogicExperiencesController::class, "find"]);
+        Route::post('experiences', [LogicExperiencesController::class, "create"]);
+        Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
+        Route::patch('experiences/{e_id}', [LogicExperiencesController::class, "changeStatus"]);
     });
 });
 

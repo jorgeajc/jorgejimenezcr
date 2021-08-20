@@ -1,14 +1,17 @@
 <template>
-  <div class="custom-control custom-checkbox d-flex">
+  <div>
     <input
       :id="id || name"
       :name="name"
       :checked="internalValue"
       type="checkbox"
-      class="custom-control-input"
+      :class="class_check"
       @click="handleClick"
     >
-    <label :for="id || name" class="custom-control-label my-auto">
+    <label
+      :for="id || name"
+      v-bind:class="class_label"
+    >
       <slot />
     </label>
   </div>
@@ -22,7 +25,9 @@ export default {
     id: { type: String, default: null },
     name: { type: String, default: 'checkbox' },
     value: { type: Boolean, default: false },
-    checked: { type: Boolean, default: false }
+    checked: { type: Boolean, default: false },
+    class_check: {type: String, default: '' },
+    class_label: {type: String, default: '' },
   },
 
   data: () => ({

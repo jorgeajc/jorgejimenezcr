@@ -10,7 +10,8 @@
                   <v-button
                     :disabled="newForm.disabled"
                     :loading="newForm.disabled"
-                  >Create</v-button>
+                    :actionText="'Save'"
+                  ></v-button>
                 </b-input-group-append>
             </b-input-group>
           </form>
@@ -28,12 +29,15 @@
                   <v-button
                     :disabled="editForm.disabled"
                     :loading="editForm.disabled"
-                  >update</v-button>
+                    :actionText="'Update'"
+                  ></v-button>
                 </form>
                 <form @submit.prevent="setValueEditForm">
                   <v-button
                     :disabled="editForm.disabled"
-                  >x</v-button>
+                    :iconPrefix="'fas'"
+                    :iconName="'times-circle'"
+                  ></v-button>
                 </form>
               </b-input-group-append>
             </b-input-group>
@@ -49,40 +53,26 @@
           v-model="skillTable.currentPage"
           :total-rows="skills.length"
           :per-page="skillTable.perPage"
-          aria-controls="my-table"
+          :aria-controls="skillTable.id"
         ></b-pagination>
         <b-table
-          id="my-table"
+          :id="skillTable.id"
           :items="skills"
           :per-page="skillTable.perPage"
           :current-page="skillTable.currentPage"
           :fields="skillTable.fields"
+          stacked="md"
+          class="table-responsive-md"
           small
         >
           <template #cell(is_active)="data">
-            <div class="switch-field">
-              <input
-                type="radio"
-                value="1"
-                v-model="data.item.is_active"
-                v-on:change="editStatus(data.item.id)"
-                v-bind:name="'status'+data.item.id"
-                v-bind:id="'act'+data.item.id"
-                :disabled="data.item.disabled"
-                :checked="data.item.is_active"
-                />
-              <label v-bind:for="'act'+data.item.id">Yes</label>
-              <input
-                type="radio"
-                value="0"
-                v-model="data.item.is_active"
-                v-on:change="editStatus(data.item.id)"
-                v-bind:name="'status'+data.item.id"
-                v-bind:id="'inac'+data.item.id"
-                :checked="!data.item.is_active"
-                :disabled="data.item.disabled"
-                />
-              <label v-bind:for="'inac'+data.item.id">No</label>
+            <div class="check-status">
+              <checkbox
+                :id="`ckeck${data.item.id}`"
+                :checked="data.item.is_active ? true : false"
+                v-on:click="editStatus(data.item)"
+                :class_label="data.item.is_active ? 'btn btn-success' : 'btn btn-secondary'"
+              />
             </div>
           </template>
 
@@ -94,12 +84,19 @@
             <div class="row">
               <div class="col-6 pr-sm-0">
                 <form @submit.prevent="edit(data.item)">
-                  <v-button>update</v-button>
+                  <v-button
+                    :iconPrefix="'fas'"
+                    :iconName="'edit'"
+                  ></v-button>
                 </form>
               </div>
               <div class="col-6 pl-sm-0">
                 <form @submit.prevent="deleteSkill(data.item)">
-                  <v-button>delete</v-button>
+                   <v-button
+                    :type="'danger'"
+                    :iconPrefix="'fas'"
+                    :iconName="'trash'"
+                  ></v-button>
                 </form>
               </div>
             </div>
@@ -109,12 +106,11 @@
           v-model="skillTable.currentPage"
           :total-rows="skills.length"
           :per-page="skillTable.perPage"
-          aria-controls="my-table"
+          :aria-controls="skillTable.id"
         ></b-pagination>
       </div>
     </div>
   </card>
-
 </template>
 
 <script>
@@ -162,6 +158,7 @@
         }
       },
       skillTable: {
+        id: "skills",
         perPage: 5,
         currentPage: 1,
         fields: [{
@@ -180,22 +177,31 @@
     }),
     methods: {
       async getAll () {
-        this.hasSkills = await this.form.get('/api/logic/skills')
+        this.hasSkills = await this.form.get('/api/skills')
         if( this.hasSkills.status === 200 ) this.skills = this.hasSkills.data.body.data
         this.hasSkills = []
       },
       async get ( skill_id ) {
-        await this.form.patch('/api/logic/skills/' + skill_id )
+        await this.form.patch('/api/skills/' + skill_id )
       },
 
-      async editStatus( skill_id ) {
-        await this.form.patch('/api/logic/skills/' + skill_id + '/status')
+      async editStatus( skill ) {
+        await this.form.patch('/api/skills/' + skill.id + '/status')
+            .then((response)=>{
+              this.skills.filter((s) => {
+                if( s.id == skill.id ) {
+                  s.is_active = !s.is_active
+                  return
+                }
+              })
+            })
+
       },
 
       async addSkill() {
         var nf = this.newForm
         this.setValueNewForm(nf.name, true)
-        await nf.post('/api/logic/skills')
+        await nf.post('/api/skills')
         .then(() => {
           this.setValueNewForm()
           this.getAll()
@@ -210,7 +216,7 @@
       async updateSkill() {
         var ef = this.editForm
         this.setValueEditForm(ef.name, ef.id, ef.update, true)
-        await ef.put( '/api/logic/skills/' + ef.id )
+        await ef.put( '/api/skills/' + ef.id )
         .then(() => {
           this.setValueEditForm ()
           this.getAll ()
@@ -228,7 +234,7 @@
       },
 
       async deleteSkill( skill ) {
-        await this.form.delete('/api/logic/skills/' + skill.id )
+        await this.form.delete('/api/skills/' + skill.id )
         .then(() => {
           this.getAll ()
         })
@@ -278,52 +284,4 @@
     }
   }
 </script>
-<style>
-  .switch-field {
-    display: flex;
-    margin-bottom: 36px;
-    overflow: hidden;
-  }
 
-  .switch-field input {
-    position: absolute !important;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    width: 1px;
-    border: 0;
-    overflow: hidden;
-  }
-
-  .switch-field label {
-    background-color: #e4e4e4;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
-    line-height: 1;
-    text-align: center;
-    padding: 8px 16px;
-    margin-right: -1px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-    transition: all 0.1s ease-in-out;
-  }
-
-  .switch-field label:hover {
-    cursor: pointer;
-  }
-
-  .switch-field input:checked + label:first-of-type {
-    background-color: #a5dc86;
-    box-shadow: none;
-  }
-.switch-field input:checked + label:last-of-type {
-    background-color: #f18b5b;
-    box-shadow: none;
-  }
-  .switch-field label:first-of-type {
-    border-radius: 4px 0 0 4px;
-  }
-
-  .switch-field label:last-of-type {
-    border-radius: 0 4px 4px 0;
-  }
-</style>
