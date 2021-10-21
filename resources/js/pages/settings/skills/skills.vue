@@ -47,6 +47,9 @@
         </div>
       </div>
     </div>
+
+    <b-form-input type="text" v-model="keyword" placeholder="Search"></b-form-input>
+
     <div class="form-group row">
       <div class="col-md-12 ml-md-auto">
         <b-pagination
@@ -57,7 +60,8 @@
         ></b-pagination>
         <b-table
           :id="skillTable.id"
-          :items="skills"
+          :items="items"
+          :keyword="keyword"
           :per-page="skillTable.perPage"
           :current-page="skillTable.currentPage"
           :fields="skillTable.fields"
@@ -174,6 +178,7 @@
           }
         ]
       },
+      keyword: '',
     }),
     methods: {
       async getAll () {
@@ -276,11 +281,20 @@
         }
         return array
       },
+
+      convertStringToLowerCase(str) {
+        return str.toLowerCase()
+      }
     },
     mounted() {
       this.getAll()
     },
     computed: {
+      items () {
+        return this.keyword
+          ? this.skills.filter( item => this.convertStringToLowerCase(item.name).includes( this.convertStringToLowerCase(this.keyword) ) )
+          : this.skills
+      }
     }
   }
 </script>
