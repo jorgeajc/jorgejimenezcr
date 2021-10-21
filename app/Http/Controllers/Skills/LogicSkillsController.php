@@ -19,7 +19,7 @@ class LogicSkillsController extends Controller {
         $this->responses = new HandlerResponsesController;
     }
     public function all() {
-        $skills = Skills::all();
+        $skills = Skills::with('users')->get();
         if( count($skills) == 0 ) return $this->responses->jsonValidationError( ["skill"=>__('api.skills.no_registered')] );
         return $this->responses->jsonSuccess( $skills );
     }
@@ -60,8 +60,7 @@ class LogicSkillsController extends Controller {
     public function delete( $id ) {
         $skill = Skills::find( $id );
         if( !$skill ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
-        if( $skill->color ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.not_found')] );
-        if( $skill->color || (count($skill->users) > 0) || $skill->level ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.delete_failed')] );
+        if( count($skill->users) > 0 ) return $this->responses->jsonNotFound( ["skill"=>__('api.skills.delete_failed')] );
         $skill->delete();
         return $this->responses->jsonSuccess( $skill );
     }

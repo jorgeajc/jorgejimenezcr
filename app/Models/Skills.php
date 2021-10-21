@@ -19,13 +19,7 @@ class Skills extends Model
     public function getCreatedAtAttribute($date){
         return Carbon::parse($date)->format('d/m/Y');
     }
-    public function color() {
-        return $this->belongsTo(Colors::class);
-    }
     public function users() {
         return $this->belongsToMany(User::class, 'users_skills')->withPivot('user_id', 'skills_id');
-    }
-    public function level() {
-        return $this->belongsTo(Levels::class, 'levels_id');
     }
 }

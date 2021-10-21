@@ -94,12 +94,14 @@
                   ></v-button>
                 </form>
               </div>
-              <div class="col-6 pl-sm-0">
+              <div class="col-6 pl-sm-0" v-if="data.item.users.length == 0">
                 <form @submit.prevent="deleteSkill(data.item)">
                    <v-button
                     :type="'danger'"
                     :iconPrefix="'fas'"
                     :iconName="'trash'"
+                    class="btn-delete-skill"
+                    :class="data.item.name"
                   ></v-button>
                 </form>
               </div>
@@ -239,13 +241,18 @@
       },
 
       async deleteSkill( skill ) {
+        var btn_delete = document.querySelector(".btn.btn-delete-skill."+skill.name)
+        this.changeBtnDisabled(btn_delete, true)
         await this.form.delete('/api/skills/' + skill.id )
         .then(() => {
           this.getAll ()
         })
         .catch(error => {
           this.setErrors( 'add', this.isArrayOrObject(error.response.data.body.error) )
+          this.changeBtnDisabled(btn_delete, false)
+          return false
         })
+        return true
       },
 
       setErrors( method, error ){
@@ -284,6 +291,10 @@
 
       convertStringToLowerCase(str) {
         return str.toLowerCase()
+      },
+
+      changeBtnDisabled(btn, bool) {
+        if(btn) btn.disabled = bool
       }
     },
     mounted() {
