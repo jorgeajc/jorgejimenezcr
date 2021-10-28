@@ -13,6 +13,7 @@ npm-debug.log
 yarn-error.log
 phpunit.dusk.xml
 /public/dist
+/public/assets_portfolio
 /public/build
 /public/mix-manifest.json
 
