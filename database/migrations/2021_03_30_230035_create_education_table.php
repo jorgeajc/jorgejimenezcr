@@ -15,6 +15,10 @@ class CreateEducationTable extends Migration
     {
         Schema::create('educations', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->string('name');
             $table->string('place');
             $table->string('description');
@@ -23,9 +27,6 @@ class CreateEducationTable extends Migration
             $table->string('status');
             $table->boolean('is_active')->default(true);
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            
             $table->timestamps();
         });
     }

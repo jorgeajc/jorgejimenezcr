@@ -15,7 +15,6 @@ class CreateUsersSkillsTable extends Migration
     {
         Schema::create('users_skills', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_active')->default(true);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -23,6 +22,8 @@ class CreateUsersSkillsTable extends Migration
             $table->unsignedBigInteger('skills_id');
             $table->foreign('skills_id')->references('id')->on('skills');
 
+            $table->boolean('is_active')->default(true);
+            
             $table->timestamps();
         });
 

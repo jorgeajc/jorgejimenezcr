@@ -15,9 +15,6 @@ class CreateSocialMediaTable extends Migration
     {
         Schema::create('socials_medias', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('link');
-            $table->boolean('is_active')->default(true);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -25,6 +22,10 @@ class CreateSocialMediaTable extends Migration
             $table->unsignedBigInteger('color_id');
             $table->foreign('color_id')->references('id')->on('colors');
 
+            $table->string('name');
+            $table->string('link');
+            $table->boolean('is_active')->default(true);
+            
             $table->timestamps();
         });
     }
