@@ -5,6 +5,7 @@ return [
         'not_found'       => 'Skill not found',
         'no_registered'   => 'No registered skills',
         'no_active'       => 'No skills active',
+        'delete_failed'   => 'Error to delete',
     ],
     'color' => [
         'not_found'       => 'Color not found',
@@ -56,6 +57,12 @@ return [
             'not_find'        => 'User not has the experience',
             'not_has'         => 'User not has the experience',
             'has'             => 'User already has this experience',
+            'error'           => 'Edition error',
+        ],
+        'level' => [
+            'not_found'       => 'Level not found',
+            'no_registered'   => 'No registered level',
+            'no_active'       => 'No level active',
             'error'           => 'Edition error',
         ],
     ]

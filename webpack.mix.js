@@ -6,6 +6,9 @@ require('laravel-mix-versionhash')
 
 mix
   .js('resources/js/app.js', 'public/dist/js')
+
+  .copy('resources/assets_portfolio', 'public/assets_portfolio')
+
   .sass('resources/sass/app.scss', 'public/dist/css')
 
   .disableNotifications()

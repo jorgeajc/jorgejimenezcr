@@ -5,6 +5,7 @@ return [
         'not_found'     => 'Habilidad no encontrada',
         'no_registered' => 'No hay habilidades registrados',
         'no_active'     => 'No hay habilidades activos',
+        'delete_failed' => 'Error al eliminar',
     ],
     'color' => [
         'not_found'     => 'Color no encontrado',
@@ -56,6 +57,12 @@ return [
             'not_find'      => 'Usuario no tiene experiencia social',
             'not_has'       => 'Usuario no tiene experiencias',
             'has'           => 'Usuario ya tiene esta experiencia',
+            'error'         => 'Error de edición',
+        ],
+        'level' => [
+            'not_found'     => 'Niveles no encontrada',
+            'no_registered' => 'No hay nivel registradas',
+            'no_active'     => 'No hay niveles activos',
             'error'         => 'Error de edición',
         ],
     ]

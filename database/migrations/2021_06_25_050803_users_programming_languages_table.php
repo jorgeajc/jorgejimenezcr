@@ -15,12 +15,20 @@ class UsersProgrammingLanguagesTable extends Migration
     {
         Schema::create('users_programming_languages', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('programming_languages_id');
+            $table->foreign('programming_languages_id')->references('id')->on('programming_languages');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('level_id');
+            $table->foreign('level_id')->references('id')->on('levels');
+
             $table->string('percentage');
             $table->string('year_experience')->default(1);
             $table->boolean('is_active')->default(true);
-
-            $table->integer('programming_languages_id');
-            $table->integer('user_id');
+            
             $table->timestamps();
         });
     }
@@ -32,6 +40,6 @@ class UsersProgrammingLanguagesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('users_programming_languages');
     }
 }

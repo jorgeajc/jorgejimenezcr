@@ -28,6 +28,6 @@ class CreateProgrammingLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('programming_language');
+        Schema::dropIfExists('programming_languages');
     }
 }

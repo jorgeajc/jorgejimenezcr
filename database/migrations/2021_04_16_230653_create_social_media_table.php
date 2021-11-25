@@ -15,12 +15,18 @@ class CreateSocialMediaTable extends Migration
     {
         Schema::create('socials_medias', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('color_id');
+            $table->foreign('color_id')->references('id')->on('colors');
+
             $table->string('name');
             $table->string('link');
-            $table->integer('user_id');
             $table->boolean('is_active')->default(true);
+            
             $table->timestamps();
-            $table->integer('color_id');
         });
     }
 

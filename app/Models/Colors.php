@@ -14,10 +14,6 @@ class Colors extends Model
         'is_active'
     ];
 
-    public function skills(){
-        return $this->hasMany(Skills::class);
-    }
-
     public function social_media() {
         return $this->hasMany(SocialsMedias::class);
     }

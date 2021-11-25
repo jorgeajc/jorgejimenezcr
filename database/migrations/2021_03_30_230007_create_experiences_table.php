@@ -15,6 +15,10 @@ class CreateExperiencesTable extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->string('name');
             $table->string('place');
             $table->string('description');
@@ -23,8 +27,8 @@ class CreateExperiencesTable extends Migration
             $table->integer('end_month')->nullable();
             $table->integer('end_year')->nullable();
             $table->boolean('is_active')->default(true);
+
             $table->timestamps();
-            $table->integer('user_id');
         });
     }
 
