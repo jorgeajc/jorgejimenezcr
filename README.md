@@ -40,5 +40,4 @@ php artisan migrate --force
 
 npm run install
 npm run prod
-
 ```
