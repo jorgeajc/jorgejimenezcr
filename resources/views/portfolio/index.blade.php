@@ -26,7 +26,6 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets_portfolio/css/style.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
