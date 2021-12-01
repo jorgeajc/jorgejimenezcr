@@ -33,7 +33,7 @@
       <div class="resume-item">
         <h4>Calidad de software</h4>
         <h5>2019</h5>
-        <p><em>Universidad Nacional de Costa Rica (UNA)</em></p>
+        <p><em>CENTIC Universidad Nacional de Costa Rica (UNA)</em></p>
         {{-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> --}}
       </div>
       <div class="resume-item">
@@ -45,7 +45,7 @@
       <div class="resume-item">
         <h4>Diplomado en programación de aplicaciones informáticas</h4>
         <h5>2016 - 2019</h5>
-        <p><em>CENTIC Universidad Nacional de Costa Rica (UNA)</em></p>
+        <p><em>Universidad Nacional de Costa Rica (UNA)</em></p>
         {{-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> --}}
       </div>
     </div>
