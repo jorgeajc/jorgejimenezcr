@@ -4,8 +4,9 @@ My web page
 # deploy
 
 ## Pull request in master brach
-git add
+git add (file-name or .)
 git commit -m "note"
+git pull
 git checkout master
 git push --set-upstream origin name-branch
 
