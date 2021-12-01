@@ -4,9 +4,14 @@ My web page
 # deploy
 
 ## Push request in master brach
-git add (file-name or .)
+```
+git add .
 git commit -m "note"
-git push --set-upstream origin name-branch
+git push --set-upstream
+```
+```
+git add . && git commit -m "note" && git push --set-upstream
+```
 
 git checkout master
 git add (file-name or .)
