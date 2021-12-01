@@ -20,9 +20,6 @@ git add .
 git commit -m "note"
 git push --set-upstream
 ```
-```
-git checkout master && git pull origin name-branch && git add . && git commit -m "note" && git push --set-upstream
-```
 
 run in your browser 
 ```
