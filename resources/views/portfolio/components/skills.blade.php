@@ -70,6 +70,15 @@
       </div>
     </div>
 
+    {{--
+      Lenguajes C++, C#, ASP . NET, JAVA, PHP, JavaScript
+      Móvil Flutter
+      QA PHPUNit, Jest, Swagger
+      Base de datos MySql, SQL Server, Oracle, SQLite, mongoDB
+      Web HTML5, CSS3, Boostrap, Ajax, Jquery, Sass, VueJs, NodeJs
+      Otros Git, XAMPP, Laragon, MVC, AWS, Cpanel, Stripe, laravel
+      --}}
+
   </div>
 
 </div>

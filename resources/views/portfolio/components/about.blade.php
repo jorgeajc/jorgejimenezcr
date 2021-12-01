@@ -21,7 +21,7 @@
             <li><i class="bi bi-chevron-right"></i> <strong>Nacimiento:</strong> <span>2 oct 1998</span></li>
             <li><i class="bi bi-chevron-right"></i> <strong>Sitio Web:</strong> <span>www.jorgejimenezcr.com</span></li>
             <li><i class="bi bi-chevron-right"></i> <strong>Teléfono:</strong> <span>+506 61953152</span></li>
-            <li><i class="bi bi-chevron-right"></i> <strong>Recidencia:</strong> <span>Costa Rica, Guanacaste, Nicoya</span></li>
+            <li><i class="bi bi-chevron-right"></i> <strong>Residencia:</strong> <span>Costa Rica, Guanacaste, Nicoya</span></li>
           </ul>
         </div>
         <div class="col-lg-6">

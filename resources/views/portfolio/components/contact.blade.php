@@ -1,7 +1,7 @@
 <div class="container" data-aos="fade-up">
 
   <div class="section-title">
-    <h2>Contact</h2>
+    <h2>Contactame</h2>
   </div>
 
   <div class="row mt-1">
