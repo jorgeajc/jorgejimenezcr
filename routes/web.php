@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Mails\MailContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,3 +22,5 @@ Route::get('/portfolio', function () {
 Route::get('/portfolio/details', function () {
     return view('portfolio.portfolio-details');
 });
+
+Route::post('mail/send', [MailContactController::class, 'send']);
