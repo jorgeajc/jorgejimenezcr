@@ -8,4 +8,7 @@
     {{-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> --}}
     <a href="https://www.linkedin.com/in/jorge-alberto-jimenez-carrillo" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
   </div>
+  <div class="social-links">
+    <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing" class="linkedin" target="_blank">Descargar CV <i class="bx bxs-cloud-download"></i></a>
+  </div>
 </div>

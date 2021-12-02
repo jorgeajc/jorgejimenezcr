@@ -29,6 +29,13 @@
               </span>
             </li>
             <li><i class="bi bi-chevron-right"></i> <strong>Residencia:</strong> <span>Costa Rica, Guanacaste, Nicoya</span></li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <strong>Curriculum vitae:</strong>
+              <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing" class="linkedin " target="_blank">
+                <i class="bx bxs-cloud-download bx-sm"></i>
+              </a>
+            </li>
           </ul>
         </div>
         <div class="col-lg-6">
