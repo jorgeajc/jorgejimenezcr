@@ -1,6 +1,6 @@
 <div class="container" data-aos="zoom-in" data-aos-delay="100">
   <h1>Jorge Alberto Jiménez Carrillo</h1>
-  <p>Yo soy <span class="typed" data-typed-items="Desarrollador full stack"></span></p>
+  <p>Soy <span class="typed" data-typed-items="Desarrollador full stack"></span></p>
   <div class="social-links">
     {{-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> --}}
     <a href="https://www.facebook.com/profile.php?id=100007280987414" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
