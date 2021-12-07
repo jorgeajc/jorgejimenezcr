@@ -7,7 +7,15 @@ require('laravel-mix-versionhash')
 mix
   .js('resources/js/app.js', 'public/dist/js')
 
-  .copy('resources/assets_portfolio', 'public/assets_portfolio')
+  // copy vendor
+  .copy('resources/assets_portfolio/vendor', 'public/assets_portfolio/vendor')
+
+  // imgs
+  .copy('resources/assets_portfolio/img', 'public/assets_portfolio/img')
+  // main
+  .js('resources/assets_portfolio/js/main.js', 'public/assets_portfolio/js')
+  // style
+  .postCss('resources/assets_portfolio/css/style.css', 'public/assets_portfolio/css')
 
   .sass('resources/sass/app.scss', 'public/dist/css')
 
@@ -15,9 +23,10 @@ mix
 
 if (mix.inProduction()) {
   mix
-    // .extract() // Disabled until resolved: https://github.com/JeffreyWay/laravel-mix/issues/1889
-    // .version() // Use `laravel-mix-versionhash` for the generating correct Laravel Mix manifest file.
-    .versionHash()
+  // .extract() // Disabled until resolved: https://github.com/JeffreyWay/laravel-mix/issues/1889
+
+  // .version() // Use `laravel-mix-versionhash` for the generating correct Laravel Mix manifest file.
+  .versionHash()
 } else {
   mix.sourceMaps()
 }
