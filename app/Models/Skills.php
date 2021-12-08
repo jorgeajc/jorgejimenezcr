@@ -20,6 +20,6 @@ class Skills extends Model
         return Carbon::parse($date)->format('d/m/Y');
     }
     public function users() {
-        return $this->belongsToMany(User::class, 'users_skills')->withPivot('user_id', 'skills_id');
+        return $this->belongsToMany(User::class, 'users_skills')->withPivot('user_id', 'skills_id', 'level_id', 'percentage', 'year_experience', 'is_active');
     }
 }

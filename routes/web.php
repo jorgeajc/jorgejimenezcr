@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Mails\MailContactController;
+use App\Http\Controllers\Portfolio\PortfolioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +14,8 @@ use App\Http\Controllers\Mails\MailContactController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('portfolio.index');
-});
-Route::get('/portfolio', function () {
-    return view('portfolio.index');
-});
-Route::get('/portfolio/details', function () {
-    return view('portfolio.portfolio-details');
-});
+Route::get('/', [PortfolioController::class, 'index']);
+Route::get('/portfolio', [PortfolioController::class, 'index']);
+Route::get('/portfolio/details', [PortfolioController::class, 'portfolioDetails']);
 
 Route::post('mail/send', [MailContactController::class, 'send']);

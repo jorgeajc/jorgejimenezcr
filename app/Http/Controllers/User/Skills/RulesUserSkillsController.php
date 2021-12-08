@@ -9,6 +9,8 @@ class RulesUserSkillsController extends Controller {
     public function validateCreate($request) {
         $validator = Validator::make($request->all(), [
             'skill_id'  => 'required',
+            'percentage'  => 'required',
+	        'year_experience'  => 'required|integer'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

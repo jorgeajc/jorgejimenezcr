@@ -11,19 +11,20 @@ class UsersSkills extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        \DB::table('users_skills')->insert([
-            [
-                "skills_id" => 1,
-                "user_id" => 1,
-            ],[
-                "skills_id" => 2,
-                "user_id" => 1,
-            ],[
-                "skills_id" => 3,
-                "user_id" => 1,
-            ],
-        ]);
+    public function run() {
+        $skills = \DB::table('skills')->select('id')->get();
+        $levels = \DB::table('levels')->pluck('id')->toArray();
+        if( $skills->count() ) {
+            foreach( $skills as $skill ) {
+                \DB::table('users_skills')->insert([[
+                    "skills_id" => $skill->id,
+                    "user_id" => 1,
+
+                    "percentage" => rand(1, 100),
+                    "year_experience" => 1,
+                    "level_id" => count($levels)>0 ? $levels[array_rand($levels)] : 1,
+                ]]);
+            }
+        }
     }
 }
