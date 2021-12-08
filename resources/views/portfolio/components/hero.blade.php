@@ -1,5 +1,7 @@
 <div class="container" data-aos="zoom-in" data-aos-delay="100">
   <h1>Jorge Alberto Jiménez Carrillo</h1>
+  {{-- <h1>{{ $user_name }}</h1> --}}
+
   <p>Soy <span class="typed" data-typed-items="Desarrollador full stack"></span></p>
   <div class="social-links">
     {{-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> --}}

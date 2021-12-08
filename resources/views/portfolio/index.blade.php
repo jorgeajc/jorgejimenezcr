@@ -42,7 +42,7 @@
 
   <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex flex-column justify-content-center">
-      @include('portfolio.components.hero')
+      @include('portfolio.components.hero'/* , ["user_name"=>$user_name] */)
     </section>
   <!-- End Hero -->
 
