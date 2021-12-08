@@ -3,16 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\SocialsMedias;
 
-class SocialsMediasSeeder extends Seeder
-{
+class SocialsMediasSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run() {
-        \DB::table('socials_medias')->insert([
+        $social_medias = [
             [
                 "name"   => "facebook",
                 'link'   => "https://www.facebook.com/profile.php?id=100007280987414",
@@ -24,6 +24,19 @@ class SocialsMediasSeeder extends Seeder
                 'user_id'=> 1,
                 "color_id" => 5,
             ]
-        ]);
+        ];
+        foreach ($social_medias as $sm) {
+            SocialsMedias::updateOrCreate(
+                [
+                    "name"   => $sm['name'],
+                    'user_id'=> $sm['user_id'],
+                ],[
+                    "name"   => $sm['name'],
+                    'user_id'=> $sm['user_id'],
+                    'link'   =>  $sm['link'],
+                    "color_id" =>  $sm['color_id'],
+                ]
+            );
+        }
     }
 }

@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class UsersSkills extends Seeder
-{
+class UsersSkills extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -16,14 +15,17 @@ class UsersSkills extends Seeder
         $levels = \DB::table('levels')->pluck('id')->toArray();
         if( $skills->count() ) {
             foreach( $skills as $skill ) {
-                \DB::table('users_skills')->insert([[
-                    "skills_id" => $skill->id,
-                    "user_id" => 1,
+                $user_skill = \DB::table('users_skills')->where(["user_id"=>13, "skills_id"=>$skill->id])->first();
+                if( !$user_skill ) {
+                    \DB::table('users_skills')->insert([[
+                        "skills_id" => $skill->id,
+                        "user_id" => 1,
 
-                    "percentage" => rand(1, 100),
-                    "year_experience" => 1,
-                    "level_id" => count($levels)>0 ? $levels[array_rand($levels)] : 1,
-                ]]);
+                        "percentage" => rand(1, 100),
+                        "year_experience" => 1,
+                        "level_id" => count($levels)>0 ? $levels[array_rand($levels)] : 1,
+                    ]]);
+                }
             }
         }
     }

@@ -5,16 +5,19 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-class UserSeeder extends Seeder
-{
+use App\Models\User;
+
+class UserSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run() {
-        \DB::table('users')->insert([
+        User::updateOrCreate(
             [
+                'email'     => "albertop2203@gmail.com"
+            ],[
                 "name"      => "Jorge Alberto",
                 'last_name' => "Jimenez Carrillo",
                 'email'     => "albertop2203@gmail.com",
@@ -28,6 +31,6 @@ class UserSeeder extends Seeder
                 'my_carrer'  => "Ingeniería en sistemas",
                 'country'   => "Costa Rica"
             ]
-        ]);
+        );
     }
 }

@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SkillsSeeder::class);//Seeder de Skills
         $this->call(UsersSkills::class);//Seeder de relationships user skill
 
-        $this->call(ExperiencesSeeder::class);//Seeder de experiences
+        // $this->call(ExperiencesSeeder::class);//Seeder de experiences
 
-        $this->call(EducationsSeeder::class);//Seeder de educations
+        // $this->call(EducationsSeeder::class);//Seeder de educations
 
         $this->call(SocialsMediasSeeder::class);//Seeder de social medias
 
