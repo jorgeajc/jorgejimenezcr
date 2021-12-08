@@ -15,7 +15,7 @@ class UsersSkills extends Seeder {
         $levels = \DB::table('levels')->pluck('id')->toArray();
         if( $skills->count() ) {
             foreach( $skills as $skill ) {
-                $user_skill = \DB::table('users_skills')->where(["user_id"=>13, "skills_id"=>$skill->id])->first();
+                $user_skill = \DB::table('users_skills')->where(["user_id"=>1, "skills_id"=>$skill->id])->first();
                 if( !$user_skill ) {
                     \DB::table('users_skills')->insert([[
                         "skills_id" => $skill->id,
