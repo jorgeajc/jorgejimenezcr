@@ -41,7 +41,7 @@
         <div class="col-lg-6">
           <ul>
             <li><i class="bi bi-chevron-right"></i> <strong>Edad:</strong> <span>23</span></li>
-            <li><i class="bi bi-chevron-right"></i> <strong>Título:</strong> <span>Bachilerato Universitario</span></li>
+            <li><i class="bi bi-chevron-right"></i> <strong>Título:</strong> <span>Bachillerato Universitario</span></li>
             <li><i class="bi bi-chevron-right"></i> <strong>Correo:</strong>
               <span>
                 albertop2203@gmail.com
