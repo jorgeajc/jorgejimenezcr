@@ -16,4 +16,5 @@ phpunit.dusk.xml
 /public/assets_portfolio
 /public/build
 /public/mix-manifest.json
+/public/js
 

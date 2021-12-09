@@ -132,10 +132,7 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets_portfolio/js/main.js') }}" ></script>
   {{-- start from library analytics.google.js --}}
-  {{-- <script  src="{{asset('js/utils/analytics.google.js')}}"></script>
-  <script>
-      gtag_page_view()
-  </script> --}}
+  <script  src="{{asset('js/utils/analytics.google.js')}}"></script>
   {{-- finish from library analytics.google.js --}}
 </body>
 

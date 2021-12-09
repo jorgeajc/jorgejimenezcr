@@ -1,6 +1,5 @@
 const currency = 'USD'
-function principal_gtag( category, action, label = '', amount) {
-    console.log('principal_gtag', category + " " + action + " " + label )
+function principal_gtag( category, action, label = '') {
     try {
         gtag(
             /* t  */'event',
@@ -8,7 +7,7 @@ function principal_gtag( category, action, label = '', amount) {
             {
             /* ec */event_category : category,// naturaly Donation
             /* el */event_label : label, // examples of analytics legacy: other ways, custom, simple donation, $10, $36, monthly donation, $72, monthly, accept, simple donation - christmas campaign
-            /* ev */value : amount, // amount to process
+            // /* ev */value : amount, // amount to process
             }
         )
     } catch(e) {
@@ -17,9 +16,10 @@ function principal_gtag( category, action, label = '', amount) {
     }
     return true
 }
-
-function gtag_page_view( amount = 0 ) {
-    // principal_gtag( 'Donation', 'Page View', '', amount )
+gtag_page_view( )
+function gtag_page_view( ) {
+    console.log('asd')
+    principal_gtag( 'Portfolio', 'Page View', '')
     return true
 }
 
