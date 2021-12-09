@@ -18,7 +18,6 @@ function principal_gtag( category, action, label = '') {
 }
 gtag_page_view( )
 function gtag_page_view( ) {
-    console.log('asd')
     principal_gtag( 'Portfolio', 'Page View', '')
     return true
 }
