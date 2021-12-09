@@ -26,6 +26,16 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets_portfolio/css/style.css') }}" rel="stylesheet">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{env('GA_ID_TRACKING')}}"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config',"{{ env('GA_ID_TRACKING') }}");
+  </script>
+  <!-- End Global site tag (gtag.js) - Google Analytics -->
 </head>
 
 <body>
@@ -121,7 +131,12 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets_portfolio/js/main.js') }}" ></script>
-
+  {{-- start from library analytics.google.js --}}
+  {{-- <script  src="{{asset('js/utils/analytics.google.js')}}"></script>
+  <script>
+      gtag_page_view()
+  </script> --}}
+  {{-- finish from library analytics.google.js --}}
 </body>
 
 </html>
