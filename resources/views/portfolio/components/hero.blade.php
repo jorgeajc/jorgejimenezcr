@@ -9,6 +9,7 @@
     {{-- <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a> --}}
     {{-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> --}}
     <a href="https://www.linkedin.com/in/jorge-alberto-jimenez-carrillo" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
+    <a href="https://api.whatsapp.com/send?phone=50661953152" class="linkedin" target="_blanck"><i class="bx bxl-whatsapp"></i></a>
   </div>
   <div class="social-links">
     <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing" class="linkedin" target="_blank">Descargar CV <i class="bx bxs-cloud-download"></i></a>

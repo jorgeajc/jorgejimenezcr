@@ -17,4 +17,5 @@ phpunit.dusk.xml
 /public/build
 /public/mix-manifest.json
 /public/js
+/public/css
 

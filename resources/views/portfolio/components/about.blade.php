@@ -24,8 +24,8 @@
               <span>
                 <a href="https://api.whatsapp.com/send?phone=50661953152" target="_blanck">
                   +506 61953152
-                <i class="bi bi-whatsapp" style="color: green"></i>
-              </a>
+                  <i class="bi bi-whatsapp" style="color: green"></i>
+                </a>
               </span>
             </li>
             <li><i class="bi bi-chevron-right"></i> <strong>Residencia:</strong> <span>Costa Rica, Guanacaste, Nicoya</span></li>

@@ -26,6 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets_portfolio/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/skills.css') }}" rel="stylesheet">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{env('GA_ID_TRACKING')}}"></script>
@@ -36,6 +37,7 @@
       gtag('config',"{{ env('GA_ID_TRACKING') }}");
   </script>
   <!-- End Global site tag (gtag.js) - Google Analytics -->
+  <script src="{{ asset('assets_portfolio/vendor/jquery/jquery-3.6.0.min.js') }}" ></script>
 </head>
 
 <body>
@@ -119,6 +121,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+
   <script src="{{ asset('assets_portfolio/vendor/aos/aos.js') }}" ></script>
   <script src="{{ asset('assets_portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" ></script>
   <script src="{{ asset('assets_portfolio/vendor/glightbox/js/glightbox.min.js') }}" ></script>

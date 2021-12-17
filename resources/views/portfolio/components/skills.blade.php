@@ -180,5 +180,21 @@
         </div>
       </div>
     </div>
+
+    <div class="col-lg-1">
+      @include('portfolio.components.skills_circle', ["img_path"=>asset('assets_portfolio/img/skills/html.png'), "img_id"=>"html-1"])
+    </div>
+    <div class="col-lg-1">
+      @include('portfolio.components.skills_circle', ["img_path"=>asset('assets_portfolio/img/skills/html.png'), "img_id"=>"html-2"])
+    </div>
+    <div class="col-lg-1">
+      @include('portfolio.components.skills_circle', ["img_path"=>asset('assets_portfolio/img/skills/html.png'), "img_id"=>"html-2"])
+    </div>
+    <div class="col-lg-1">
+      @include('portfolio.components.skills_circle', ["img_path"=>asset('assets_portfolio/img/skills/html.png'), "img_id"=>"html-2"])
+    </div>
   </div>
+
+
 </div>
+<script src="{{ asset('js/skills.js') }}" ></script>

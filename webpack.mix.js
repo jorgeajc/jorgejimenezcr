@@ -16,8 +16,10 @@ mix
   .copy('resources/assets_portfolio/img', 'public/assets_portfolio/img')
   // main
   .js('resources/assets_portfolio/js/main.js', 'public/assets_portfolio/js')
+  .copy('resources/js/portfolio/skills/skills.js', 'public/js')
   // style
   .postCss('resources/assets_portfolio/css/style.css', 'public/assets_portfolio/css')
+  .postCss('resources/css/portfolio/skills/skills.css', 'public/css')
 
   .sass('resources/sass/app.scss', 'public/dist/css')
 
