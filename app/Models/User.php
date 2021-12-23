@@ -33,7 +33,10 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         'about_me',
         'my_carrer',
         'email',
-        'password'
+        'password',
+        'site',
+        'title',
+        'availability'
     ];
 
     /**
@@ -125,13 +128,16 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     }
 
     public function getBirthdayAttribute() {
+        return date('d/m/Y', strtotime($this->attributes['birthday']));
+    }
+    public function getAgeAttribute() {
         return Carbon::parse($this->attributes['birthday'])->age;
     }
     public function experiences() {
         return $this->hasMany(Experiences::class);
     }
     public function skills() {
-        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('user_id', 'skills_id', 'is_active');
+        return $this->belongsToMany(Skills::class, 'users_skills')->withPivot('user_id', 'skills_id', 'level_id', 'is_active', 'percentage', 'year_experience',);
     }
     public function social_media() {
         return $this->hasMany(SocialsMedias::class);

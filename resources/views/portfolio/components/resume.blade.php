@@ -10,16 +10,16 @@
     <div class="col-lg-6">
       <h3 class="resume-title">Resumen</h3>
       <div class="resume-item pb-0">
-        <h4>Jorge Alberto Jiménez Carrillo</h4>
+        <h4>{{ $user->name }} {{ $user->name }}</h4>
         <p>
           <em>
-            Desarrollador FullStack. Experiencia en todas las etapas del ciclo de vida del desarrollo de proyectos web dinámicos. Fuerte experiencia de backend.
+            {{ $user->about_me }}
           </em>
         </p>
         <ul>
-          <li>Costa Rica, Guanacaste, Nicoya</li>
-          <li>+506 61953152</li>
-          <li>albertop2203@gmail.com</li>
+          <li>{{ $user->address }}</li>
+          <li>+506 {{ $user->whatsapp }}</li>
+          <li>{{ $user->email }}</li>
         </ul>
       </div>
 

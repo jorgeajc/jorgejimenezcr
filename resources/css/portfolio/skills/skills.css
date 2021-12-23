@@ -1,46 +1,26 @@
 
+svg.svg_skill {
+    height: 145px;
+    width: 145px;
+}
 
-.div-circle {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    position: relative;
-    width: 100px;
-    height: 100px;
-    transform: rotate(1deg);
+svg.svg_skill .progress-bar__background {
+    fill: none;
+    stroke: #e2eff0;
+    stroke-width: 1.8;
 }
-.div-circle > .svg-circle {
-    height: 100%;
-    overflow: visible;
-}
-.div-circle > .svg-circle .progress-circle {
+
+svg.svg_skill .progress-bar__progress {
+    fill: none;
+    stroke: #e2eff0;
     stroke: #0563bb;
-    stroke-width: 6px;
-    transition: 1s linear;
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 100;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+    transition: stroke-dashoffset 1s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
-
-.zoom:hover {
-    z-index: 100;
-    animation: scale 0.1s linear;
-        -webkit-animation: scale 0.1s linear;
-        -moz-animation: scale 0.1s linear;
-    transform-origin: 17% 100%;
-    animation-fill-mode: forwards;
-}
-
-@keyframes scale {
-    0%{
-        transform:scale(1.0);
-    }
-    100%{
-        transform:scale(1.1);
-    }
-}
-@keyframes scaledown{
-    0%{
-        transform:scale(1.1);
-    }
-    100%{
-        transform:scale(1.0);
-    }
+svg.svg_skill g text {
+    font-family: "Poppins", sans-serif;
+    color: #45505b;
 }

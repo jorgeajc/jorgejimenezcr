@@ -18,11 +18,15 @@ class SocialsMediasSeeder extends Seeder {
                 'link'   => "https://www.facebook.com/profile.php?id=100007280987414",
                 'user_id'=> 1,
                 "color_id" => 3,
+                "class"  => "facebook",
+                "class_icon"  => "bx bxl-facebook",
             ],[
                 "name"   => "linkedin",
                 'link'   => "https://www.linkedin.com/in/jorge-alberto-jimenez-carrillo",
                 'user_id'=> 1,
                 "color_id" => 5,
+                "class"  => "linkedin",
+                "class_icon"  => "bx bxl-linkedin",
             ]
         ];
         foreach ($social_medias as $sm) {
@@ -31,10 +35,12 @@ class SocialsMediasSeeder extends Seeder {
                     "name"   => $sm['name'],
                     'user_id'=> $sm['user_id'],
                 ],[
-                    "name"   => $sm['name'],
-                    'user_id'=> $sm['user_id'],
-                    'link'   =>  $sm['link'],
-                    "color_id" =>  $sm['color_id'],
+                    "name"      => $sm['name'],
+                    'user_id'   => $sm['user_id'],
+                    'link'      =>  $sm['link'],
+                    "color_id"  =>  $sm['color_id'],
+                    "class"     =>  $sm['class'],
+                    "class_icon"  =>  $sm['class_icon'],
                 ]
             );
         }

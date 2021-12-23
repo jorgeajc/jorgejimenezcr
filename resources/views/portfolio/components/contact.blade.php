@@ -11,19 +11,19 @@
         <div class="address">
           <i class="bi bi-geo-alt"></i>
           <h4>Ubicación:</h4>
-          <p>Costa Rica, Guanacaste, Nicoya</p>
+          <p>{{ $user->address }}</p>
         </div>
 
         <div class="email">
           <i class="bi bi-envelope"></i>
           <h4>Correo:</h4>
-          <p>albertop2203@gmail.com</p>
+          <p>{{ $user->email }}</p>
         </div>
 
         <div class="phone">
-          <a href="https://api.whatsapp.com/send?phone=50661953152" target="_blanck"><i class="bi bi-phone"></i></a>
+          <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}" target="_blanck"><i class="bi bi-phone"></i></a>
           <h4>Teléfono:</h4>
-          <p><a href="https://api.whatsapp.com/send?phone=50661953152" target="_blanck">+506 61953152</a></p>
+          <p><a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}" target="_blanck">+506 {{ $user->whatsapp }}</a></p>
         </div>
 
       </div>

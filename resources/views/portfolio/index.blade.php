@@ -54,7 +54,7 @@
 
   <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex flex-column justify-content-center">
-      @include('portfolio.components.hero'/* , ["user_name"=>$user_name] */)
+      @include('portfolio.components.hero', ["user"=>$user])
     </section>
   <!-- End Hero -->
 
@@ -62,7 +62,7 @@
     <main id="main">
       <!-- ======= About Section ======= -->
         <section id="about" class="about">
-          @include('portfolio.components.about')
+          @include('portfolio.components.about', ["user"=>$user])
         </section>
       <!-- End About Section -->
 
@@ -74,13 +74,13 @@
 
       <!-- ======= Skills Section ======= -->
         <section id="skills" class="skills section-bg">
-          @include('portfolio.components.skills')
+          @include('portfolio.components.skills', ["skills"=>$user->skills])
         </section>
       <!-- End Skills Section -->
 
       <!-- ======= Resume Section ======= -->
         <section id="resume" class="resume">
-          @include('portfolio.components.resume')
+          @include('portfolio.components.resume', ["user"=>$user])
         </section>
       <!-- End Resume Section -->
 
@@ -104,7 +104,7 @@
 
       <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">
-          @include('portfolio.components.contact')
+          @include('portfolio.components.contact', ["user"=>$user])
         </section>
       <!-- End Contact Section -->
     </main>

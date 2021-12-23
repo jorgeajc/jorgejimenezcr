@@ -14,6 +14,8 @@ class SocialsMedias extends Model
         'is_active',
         'user_id',
         'color_id',
+        "class",
+        "class_icon"
     ];
 
     public function user() {

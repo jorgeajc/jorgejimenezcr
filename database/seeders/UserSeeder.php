@@ -28,8 +28,11 @@ class UserSeeder extends Seeder {
                 'google_id' => null,
                 'address'   => "Costa Rica, Guanacaste, Nicoya",
                 'about_me'  => "Desarrollador FullStack. Experiencia en todas las etapas del ciclo de vida desarrollo de proyectos web dinámicos. Fuerte experiencia de backend.",
-                'my_carrer'  => "Ingeniería en sistemas",
-                'country'   => "Costa Rica"
+                'my_carrer' => "Ingeniero en sistemas - Desarrollador full stack",
+                'country'   => "Costa Rica",
+                'site'      => "www.jorgejimenezcr.com",
+                'title'     => "Bachillerato Universitario",
+                'availability'=> "Disponible"
             ]
         );
     }
