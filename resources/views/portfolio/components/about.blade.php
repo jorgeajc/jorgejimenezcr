@@ -21,7 +21,9 @@
             <li><i class="bi bi-chevron-right"></i> <strong>Sitio Web:</strong> <span><a href="#">{{ $user->site }}</a></span></li>
             <li><i class="bi bi-chevron-right"></i> <strong>Teléfono:</strong>
               <span>
-                <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}" target="_blanck">
+                <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}"
+                  target="_blanck"
+                  onclick="gtag_whatsapp_about_me()">
                   +506 {{ $user->whatsapp }}
                   <i class="bi bi-whatsapp" style="color: green"></i>
                 </a>
@@ -31,7 +33,9 @@
             <li>
               <i class="bi bi-chevron-right"></i>
               <strong>Curriculum vitae:</strong>
-              <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing" class="linkedin " target="_blank">
+              <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing"
+                  target="_blank"
+                  onclick="gtag_download_cv_about_me()">
                 <i class="bx bxs-cloud-download bx-sm"></i>
               </a>
             </li>

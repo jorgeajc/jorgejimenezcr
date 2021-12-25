@@ -38,6 +38,10 @@
   </script>
   <!-- End Global site tag (gtag.js) - Google Analytics -->
   <script src="{{ asset('assets_portfolio/vendor/jquery/jquery-3.6.0.min.js') }}" ></script>
+
+  {{-- start from library analytics.google.js --}}
+  <script src="{{asset('js/utils/analytics.google.js')}}" type="text/javascript"></script>
+  {{-- finish from library analytics.google.js --}}
 </head>
 
 <body>
@@ -134,9 +138,6 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets_portfolio/js/main.js') }}" ></script>
-  {{-- start from library analytics.google.js --}}
-  {{-- <script src="{{asset('js/utils/analytics.google.js')}}" type="text/javascript"></script> --}}
-  {{-- finish from library analytics.google.js --}}
 </body>
 
 </html>
