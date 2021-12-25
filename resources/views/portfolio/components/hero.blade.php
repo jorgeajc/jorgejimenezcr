@@ -10,9 +10,18 @@
       </a>
     @endforeach
 
-    <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}" class="linkedin" target="_blanck"><i class="bx bxl-whatsapp"></i></a>
+    <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}"
+      target="_blanck"
+      onclick="gtag_whatsapp_principal_page()">
+      <i class="bx bxl-whatsapp"></i>
+    </a>
   </div>
   <div class="social-links">
-    <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing" class="linkedin" target="_blank">Descargar CV <i class="bx bxs-cloud-download"></i></a>
+    <a href="https://drive.google.com/file/d/1-R4EH8sMch4y-FYj6QvShsnkuGqz89lg/view?usp=sharing"
+      target="_blank"
+      onclick="gtag_download_cv_principal_page()">
+      Descargar CV
+      <i class="bx bxs-cloud-download"></i>
+    </a>
   </div>
 </div>

@@ -18,59 +18,42 @@ function principal_gtag( category, action, label = '') {
 }
 gtag_page_view( )
 function gtag_page_view( ) {
-    principal_gtag( 'Portfolio', 'Page View', '')
-    return true
+  console.log('gtag_page_view')
+  principal_gtag( 'Portfolio', 'Page View', '')
+  return true
 }
 
-/**
- * @param {*} donation json
- * @returns
- */
-function gtag_process_donate( donation = null ) {
-    if( !donation ) return
-    /* if( donation.campaign_id ){
-        gtag_with_custom_amount( amount, 'With-Custom-Amount' )
-        return true
-    } */
-    var label = donation.plan_id ? 'Monthly Donation' : 'Simple Donation'
-    let amount = donation.amount
-    gtag_donate( amount, label )
-    return true
+/*
+  download CV
+*/
+function gtag_download_cv_principal_page( ) {
+  console.log('gtag_download_cv')
+  principal_gtag( 'Portfolio', 'Download CV principal page', '')
+  return true
+}
+function gtag_download_cv_about_me( ) {
+  console.log('gtag_download_cv')
+  principal_gtag( 'Portfolio', 'Download CV about me', '')
+  return true
 }
 
-function gtag_donate( amount = 0, label = '' ) {
-    if(amount == 0) return false
-    principal_gtag( 'Donation', 'Donate', label, amount )
-    return true
+/*
+  Whatsapp
+*/
+function gtag_whatsapp_principal_page( ) {
+  console.log('gtag_whatsapp_principal_page')
+  principal_gtag( 'Portfolio', 'Whatsapp principal page', '')
+  return true
+}
+function gtag_whatsapp_about_me( ) {
+  console.log('gtag_whatsapp_about_me')
+  principal_gtag( 'Portfolio', 'Whatsapp about me', '')
+  return true
+}
+function gtag_whatsapp_contact_me( ) {
+  console.log('gtag_whatsapp_contact_me')
+  principal_gtag( 'Portfolio', 'Whatsapp contact me', '')
+  return true
 }
 
 
-function gtag_with_custom_amount( amount = 0, label = '' ) {
-    if(amount == 0) return false
-    principal_gtag( 'Donation', 'Next Step', label, amount )
-    return true
-}
-
-function gtag_select_plan( amount = 0, label = '' ) {
-    if(amount == 0) return false
-    principal_gtag( 'Donation', 'Select Plan', label, amount )
-    return true
-}
-
-function gtag_other_ways( amount = 0 ) {
-    if(amount == 0) return false
-    principal_gtag( 'Donation', 'Other Ways', '', amount )
-    return true
-}
-
-function gtag_type_donation( amount = 0 ) {
-    if(amount == 0) return false
-    principal_gtag( 'Donation', 'Type of Donation', '', amount )
-    return true
-}
-
-function gtag_terms_conditions( amount = 0 ) {
-    if(amount == 0) return false
-    principal_gtag( 'Donation', 'Terms Conditions', '', amount )
-    return true
-}

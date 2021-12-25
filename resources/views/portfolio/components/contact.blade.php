@@ -21,9 +21,19 @@
         </div>
 
         <div class="phone">
-          <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}" target="_blanck"><i class="bi bi-phone"></i></a>
+          <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}"
+            target="_blanck"
+            onclick="gtag_whatsapp_contact_me()">
+            <i class="bi bi-phone"></i>
+          </a>
           <h4>Teléfono:</h4>
-          <p><a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}" target="_blanck">+506 {{ $user->whatsapp }}</a></p>
+          <p>
+            <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}"
+              target="_blanck"
+              onclick="gtag_whatsapp_contact_me()">
+              +506 {{ $user->whatsapp }}
+            </a>
+          </p>
         </div>
 
       </div>

@@ -10,7 +10,7 @@ mix
   // copy vendor
   .copy('resources/assets_portfolio/vendor', 'public/assets_portfolio/vendor')
 
-  .js('resources/js/utils/analytics.google.js', 'public/js/utils/analytics.google.js')
+  .copy('resources/js/utils/analytics.google.js', 'public/js/utils/analytics.google.js')
 
   // imgs
   .copy('resources/assets_portfolio/img', 'public/assets_portfolio/img')
