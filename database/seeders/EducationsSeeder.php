@@ -3,19 +3,50 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Educations;
+use App\Models\User;
 
 class EducationsSeeder extends Seeder {
     public function run() {
-        \DB::table('educations')->insert([
-            [
-                "name"       => "Masters in Information Technology",
-                "place"      => "from International University",
-                'start_year' => "2011",
-                'end_year'   => "2013",
-                'description'=> "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
-                "status"     => "Finaliced",
-                'user_id'    => 1,
-            ]
-        ]);
+        $user = User::where('email', "albertop2203@gmail.com")->first();
+        if( $user ) {
+            $educations = [
+                [
+                    "name"       => "Bachillerato en ingeniería en sistemas de información",
+                    "place"      => "Universidad Nacional de Costa Rica (UNA)",
+                    'start_year' => "2016",
+                    'end_year'   => "2020",
+                ],[
+                    "name"       => "Calidad de software",
+                    "place"      => "CENTIC Universidad Nacional de Costa Rica (UNA)",
+                    'start_year' => "2019",
+                    'end_year'   => "2019",
+                ],[
+                    "name"       => "Desarrollo de aplicación Java para punto de venta",
+                    "place"      => "Universidad Nacional de Costa Rica (UNA), Excelencia académica",
+                    'start_year' => "2018",
+                    'end_year'   => "2018",
+                ],[
+                    "name"       => "Diplomado en programaciónde aplicaciones informáticas",
+                    "place"      => "Universidad Nacional de Costa Rica (UNA)",
+                    'start_year' => "2016",
+                    'end_year'   => "2019",
+                ],
+            ];
+            foreach ($educations as $e) {
+                Educations::updateOrCreate(
+                    [
+                        "name"      => $e['name'],
+                        'user_id'   => $user->id,
+                    ],[
+                        "name"      => $e['name'],
+                        'place'     => $e['place'],
+                        'start_year'=> $e['start_year'],
+                        "end_year"  => $e['end_year'],
+                        "user_id"   => $user->id,
+                    ]
+                );
+            }
+        }
     }
 }
