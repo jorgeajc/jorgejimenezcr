@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-
-class Experiences extends Model
-{
+class Experiences extends Model {
     use HasFactory;
 
     protected $fillable = [
@@ -27,6 +25,10 @@ class Experiences extends Model
 
     public function users() {
         return $this->belongsTo(User::class);
+    }
+
+    public function details() {
+        return $this->hasMany(ExperienceDetails::class, 'experiences_id');
     }
 
     public function getStartDateAttribute() {

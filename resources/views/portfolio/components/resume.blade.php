@@ -18,67 +18,41 @@
         </p>
         <ul>
           <li>{{ $user->address }}</li>
-          <li>+506 {{ $user->whatsapp }}</li>
+          <li>
+            <a href="https://api.whatsapp.com/send?phone=506{{ $user->whatsapp }}"
+              target="_blanck"
+              onclick="gtag_whatsapp_summary()">
+              +506 {{ $user->whatsapp }}
+            </a>
+          </li>
           <li>{{ $user->email }}</li>
         </ul>
       </div>
 
       <h3 class="resume-title">Educación</h3>
-      <div class="resume-item">
-        <h4>Bachillerato en Ingeniería de Sistemas de Información</h4>
-        <h5>2016 - 2020</h5>
-        <p><em>Universidad Nacional de Costa Rica (UNA)</em></p>
-        {{-- <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p> --}}
-      </div>
-      <div class="resume-item">
-        <h4>Calidad de software</h4>
-        <h5>2019</h5>
-        <p><em>CENTIC Universidad Nacional de Costa Rica (UNA)</em></p>
-        {{-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> --}}
-      </div>
-      <div class="resume-item">
-        <h4>Desarrollo de Aplicación Java para Punto de Venta</h4>
-        <h5>2018</h5>
-        <p><em>Universidad Nacional de Costa Rica (UNA), Excelencia académica</em></p>
-        {{-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> --}}
-      </div>
-      <div class="resume-item">
-        <h4>Diplomado en programación de aplicaciones informáticas</h4>
-        <h5>2016 - 2019</h5>
-        <p><em>Universidad Nacional de Costa Rica (UNA)</em></p>
-        {{-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> --}}
-      </div>
+      @foreach ($user->educations as $education)
+        <div class="resume-item">
+          <h4>{{ $education->name }}</h4>
+          <h5> {{ $education->startEndDate }} </h5>
+          <p><em>{{ $education->place }}</em></p>
+          {{-- <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p> --}}
+        </div>
+      @endforeach
     </div>
     <div class="col-lg-6">
       <h3 class="resume-title">Experiencia Profesional</h3>
-      <div class="resume-item">
-        <h4>Desarrollador Full Stack</h4>
-        <h5>noviembre-2020 - Present</h5>
-        <p><em>Epic Studio</em></p>
-        <ul>
-          <li>Desarrollo del Sistema web territoriodezaguates.com</li>
-          <li>Desarrollo del Sistema web alimento.cr</li>
-          <li>Realización de pruebas de aseguramiento de la calidad para descubrir errores y optimizar la usabilidad</li>
-          <li>Completar tareas detalladas de programación y desarrollo para sitios web internos</li>
-        </ul>
-      </div>
-      <div class="resume-item">
-        <h4>Desarrollador web por pasantía de practicante</h4>
-        <h5>julio-2020 - noviembre-2020</h5>
-        <p><em>Epic Studio</em></p>
-        <ul>
-          <li>Realización de pruebas de aseguramiento de la calidad para descubrir errores y optimizar la usabilidad de sistemas tanto internos como de cliente</li>
-          <li>Desarrollo del Sistema web alimento.cr</li>
-        </ul>
-      </div>
-      <div class="resume-item">
-        <h4>Desarrollo Universitario</h4>
-        <h5>2019 – 2020</h5>
-        <p><em>Municipalidad de Nicoya</em></p>
-        <ul>
-          <li>Sistema interno de control vehicular, reservación y mantenimiento de los vehículos, control de presupuesto interno</li>
-        </ul>
-      </div>
+      @foreach ($user->experiences as $experience)
+        <div class="resume-item">
+          <h4>{{ $experience->name }}</h4>
+          <h5> {{ $experience->startDate }} - {{ $experience->endDate }} </h5>
+          <p><em>{{ $experience->place }}</em></p>
+          <ul>
+            @foreach ($experience->details as $detail)
+              <li>{{ $detail->description }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endforeach
     </div>
   </div>
 

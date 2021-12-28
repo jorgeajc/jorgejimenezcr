@@ -21,4 +21,10 @@ class Educations extends Model
     public function users() {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function getStartEndDateAttribute() {
+        $start  = $this->attributes['start_year'];
+        $end    = $this->attributes['end_year'];
+        return $start . ( $start==$end ? "" : " - " . ($end?$end:"Presente"));
+    }
 }
