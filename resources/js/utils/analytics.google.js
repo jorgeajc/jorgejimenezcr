@@ -50,6 +50,11 @@ function gtag_whatsapp_about_me( ) {
   principal_gtag( 'Portfolio', 'Whatsapp about me', '')
   return true
 }
+function gtag_whatsapp_summary( ) {
+  console.log('gtag_whatsapp_summary')
+  principal_gtag( 'Portfolio', 'Whatsapp summary', '')
+  return true
+}
 function gtag_whatsapp_contact_me( ) {
   console.log('gtag_whatsapp_contact_me')
   principal_gtag( 'Portfolio', 'Whatsapp contact me', '')
