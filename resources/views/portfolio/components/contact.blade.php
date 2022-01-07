@@ -58,6 +58,9 @@
         <div class="form-group mt-3">
           <textarea class="form-control" name="message" id="message" rows="5" placeholder="Mensaje" required></textarea>
         </div>
+        <div class="form-group mt-3">
+          {!! app('captcha')->display() !!}
+        </div>
         <div class="my-3">
           <div class="loading">Cargando</div>
           <div class="error-message"></div>
