@@ -10,8 +10,9 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets_portfolio/img/j.png') }}" rel="icon">
-  <link href="{{ asset('assets_portfolio/img/j.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets_portfolio/img/j.ico') }}" rel="icon">
+  <link href="{{ asset('assets_portfolio/img/j.ico') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets_portfolio/img/j.ico') }}" rel="shortcut icon" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -42,6 +43,8 @@
   {{-- start from library analytics.google.js --}}
   <script src="{{asset('js/utils/analytics.google.js')}}" type="text/javascript"></script>
   {{-- finish from library analytics.google.js --}}
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
