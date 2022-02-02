@@ -47,4 +47,9 @@ class Experiences extends Model {
         }
         return null;
     }
+
+
+    public function getStartDateFilterAttribute() {
+        return $this->attributes['start_month'] . ' ' . $this->attributes['start_year'];
+    }
 }
