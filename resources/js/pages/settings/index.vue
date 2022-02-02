@@ -38,10 +38,47 @@ export default {
           name: this.$t('password'),
           route: 'settings.password'
         },
+        // education
         {
           icon: 'user',
-          name: this.$t('skills'),
+          name: "Educación",
+          route: 'education.index'
+        },
+
+        // experience
+        {
+          icon: 'user',
+          name: "Experiencia",
+          route: 'experience.index'
+        },
+
+        // social media and colors
+        {
+          icon: 'user',
+          name: "Medios Sociales",
+          route: 'social_medias.index'
+        },
+        {
+          icon: 'user',
+          name: "Colores",
+          route: 'colors.index'
+        },
+
+        // skills, levels and programming languages
+        {
+          icon: 'user',
+          name: "Habilidades",
           route: 'skills.index'
+        },
+        {
+          icon: 'user',
+          name: "Niveles",
+          route: 'levels.index'
+        },
+        {
+          icon: 'user',
+          name: "Lenguajes de programación",
+          route: 'programming_languages.index'
         }
       ]
     }
