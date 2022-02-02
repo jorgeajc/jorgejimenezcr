@@ -192,7 +192,6 @@
       async getAll () {
         this.hasLevels = await this.form.get('/api/level')
         if( this.hasLevels.status === 200 ) this.levels = this.hasLevels.data.body.data
-        console.log(this.levels);
         this.hasLevels = []
       },
       async editStatus( level ) {
