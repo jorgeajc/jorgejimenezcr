@@ -9,8 +9,7 @@ use App\Http\Controllers\HandlerResponses\HandlerResponsesController;
 use Illuminate\Http\Request;
 use App\Models\Levels;
 
-class LogicLevelsController extends Controller
-{
+class LogicLevelsController extends Controller {
     protected $rules;
     protected $responses;
 
@@ -19,7 +18,7 @@ class LogicLevelsController extends Controller
         $this->responses = new HandlerResponsesController;
     }
     public function all() {
-        $levels = Levels::all();
+        $levels = Levels::with('skills')->get();
         if( count($levels) == 0 ) return $this->responses->jsonValidationError( ["level"=>__('api.level.no_registered')] );
         return $this->responses->jsonSuccess( $levels );
     }
@@ -56,5 +55,13 @@ class LogicLevelsController extends Controller
             "is_active" => !$level->is_active
         ]);
         return $this->responses->jsonSuccess( $level );
+    }
+
+    public function delete( $id ) {
+        $levels = Levels::find( $id );
+        if( !$levels ) return $this->responses->jsonNotFound( ["level"=>__('api.level.not_found')] );
+        if( count($levels->skills) > 0 ) return $this->responses->jsonNotFound( ["level"=>__('api.level.delete_failed')] );
+        $levels->delete();
+        return $this->responses->jsonSuccess( $levels );
     }
 }

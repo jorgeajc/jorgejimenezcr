@@ -20,7 +20,17 @@ export default [
       { path: '', redirect: { name: 'settings.profile' } },
       { path: 'profile', name: 'settings.profile', component: page('settings/profile.vue') },
       { path: 'password', name: 'settings.password', component: page('settings/password.vue') },
-      { path: 'skills' , name: 'skills.index', component: page('settings/skills/skills.vue') }
+
+      { path: 'education' , name: 'education.index', component: page('settings/education/education.vue') },
+
+      { path: 'experience' , name: 'experience.index', component: page('settings/experience/experience.vue') },
+
+      { path: 'social_medias' , name: 'social_medias.index', component: page('settings/social_medias/social_medias.vue') },
+      { path: 'colors' , name: 'colors.index', component: page('settings/colors/colors.vue') },
+
+      { path: 'skills' , name: 'skills.index', component: page('settings/skills/skills.vue') },
+      { path: 'levels' , name: 'levels.index', component: page('settings/levels/levels.vue') },
+      { path: 'programming_languages' , name: 'programming_languages.index', component: page('settings/programming_languages/programming_languages.vue') },
     ]
   },
 

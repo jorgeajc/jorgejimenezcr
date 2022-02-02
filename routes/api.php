@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('level', [LogicLevelsController::class, "create"]);
     Route::put('level/{id}', [LogicLevelsController::class, "update"]);
     Route::patch('level/{id}/status', [LogicLevelsController::class, "changeStatus"]);
+    Route::delete('level/{id}', [LogicLevelsController::class, "delete"]);
 
     Route::group(['prefix' => 'user'],function (){
         /**
