@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SocialsMediasSeeder::class);//Seeder de social medias
 
+        $this->call(CurrencySeeder::class);//currencies
+
         // $this->call(ProgrammingLanguages::class);//Seeder de social medias
         // $this->call(UsersProgrammingLanguages::class);//Seeder de social medias
     }

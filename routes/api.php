@@ -18,6 +18,8 @@ use App\Http\Controllers\User\ProgrammingLanguages\LogicUserProgramLangControlle
 use App\Http\Controllers\User\SocialsMedias\LogicSocialsMediasController;
 use App\Http\Controllers\User\Educations\LogicEducationsController;
 use App\Http\Controllers\User\Experiences\LogicExperiencesController;
+use App\Http\Controllers\ExchangeRate\ExchangeRateController;
+use App\Http\Controllers\ExchangeRate\CurrencyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -127,6 +129,18 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
         Route::patch('experiences/{e_id}', [LogicExperiencesController::class, "changeStatus"]);
     });
+
+    Route::group(['prefix' => 'currency'],function (){
+
+        Route::get('sync/{date?}', [CurrencyController::class, "SyncCurrency"]);
+
+        Route::group(['prefix' => 'exchange/rate'],function (){
+            Route::get('{date?}', [ExchangeRateController::class, "syncExchangeCurrency"]);
+            Route::post('convert', [ExchangeRateController::class, "convert"]);
+        });
+
+    });
+
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

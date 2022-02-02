@@ -5,8 +5,7 @@ namespace App\Http\Controllers\HandlerResponses;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HandlerResponsesController extends Controller
-{
+class HandlerResponsesController extends Controller {
     public function jsonServerError($data) {
         return response()->json([
             "body" => [
@@ -47,5 +46,14 @@ class HandlerResponsesController extends Controller
             ],
         ], 422);
     }
+    public function jsonExternalServerError($msg) {
+        return response()->json([
+            "body" => [
+                "message"=> "Not Found",
+                "error"=> $msg,
+            ],
+        ], 422);
+    }
+
 
 }
