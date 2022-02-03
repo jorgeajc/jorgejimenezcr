@@ -1,9 +1,10 @@
 <template>
-  <card :title="'Habilidades'">
+  <card :title="'Niveles'">
     <div class="form-group row">
       <div class="col-md-6 col-12">
+        <!-- form create -->
         <div class="col-12">
-          <form @submit.prevent="addSkill">
+          <form @submit.prevent="addLevel">
             <b-input-group prepend="name" class="mt-3">
                 <b-form-input type="text" v-model="newForm.name"></b-form-input>
                 <b-input-group-append>
@@ -16,16 +17,18 @@
             </b-input-group>
           </form>
         </div>
+        <!-- alert errors -->
         <div class="col-12">
           <b-alert :show="errors.add.showDismissibleAlert" @dismissed="clearError('add')" variant="danger" dismissible>{{ errors.add.error }}</b-alert>
         </div>
       </div>
       <div class="col-md-6 col-12" v-if="editForm.update">
+        <!-- form update -->
         <div class="col-12">
             <b-input-group prepend="name" class="mt-3">
               <b-form-input type="text" v-model="editForm.name"></b-form-input>
               <b-input-group-append>
-                <form @submit.prevent="updateSkill">
+                <form @submit.prevent="updateLevel">
                   <v-button
                     :disabled="editForm.disabled"
                     :loading="editForm.disabled"
@@ -42,29 +45,31 @@
               </b-input-group-append>
             </b-input-group>
         </div>
+        <!-- alert errors -->
         <div class="col-12">
           <b-alert :show="errors.edit.showDismissibleAlert" @dismissed="clearError('edit')" variant="danger" dismissible>{{ errors.edit.error }}</b-alert>
         </div>
       </div>
     </div>
 
+    <!-- input search -->
     <b-form-input type="text" v-model="keyword" placeholder="Search"></b-form-input>
 
     <div class="form-group row">
       <div class="col-md-12 ml-md-auto">
         <b-pagination
-          v-model="skillTable.currentPage"
-          :total-rows="skills.length"
-          :per-page="skillTable.perPage"
-          :aria-controls="skillTable.id"
+          v-model="levelTable.currentPage"
+          :total-rows="levels.length"
+          :per-page="levelTable.perPage"
+          :aria-controls="levelTable.id"
         ></b-pagination>
         <b-table
-          :id="skillTable.id"
+          :id="levelTable.id"
           :items="items"
           :keyword="keyword"
-          :per-page="skillTable.perPage"
-          :current-page="skillTable.currentPage"
-          :fields="skillTable.fields"
+          :per-page="levelTable.perPage"
+          :current-page="levelTable.currentPage"
+          :fields="levelTable.fields"
           stacked="md"
           class="table-responsive-md"
           small
@@ -94,25 +99,26 @@
                   ></v-button>
                 </form>
               </div>
-              <div class="col-6 pl-sm-0" v-if="data.item.users.length == 0">
-                <form @submit.prevent="deleteSkill(data.item)">
+              <div class="col-6 pl-sm-0" v-if="data.item.skills.length == 0">
+                <form @submit.prevent="deleteLevel(data.item)">
                    <v-button
                     :type="'danger'"
                     :iconPrefix="'fas'"
                     :iconName="'trash'"
-                    class="btn-delete-skill"
+                    class="btn-delete-level"
                     :class="data.item.name"
                   ></v-button>
                 </form>
               </div>
             </div>
           </template>
+
         </b-table>
         <b-pagination
-          v-model="skillTable.currentPage"
-          :total-rows="skills.length"
-          :per-page="skillTable.perPage"
-          :aria-controls="skillTable.id"
+          v-model="levelTable.currentPage"
+          :total-rows="levels.length"
+          :per-page="levelTable.perPage"
+          :aria-controls="levelTable.id"
         ></b-pagination>
       </div>
     </div>
@@ -150,9 +156,9 @@
         update: false,
         disabled: false
       }),
-      skills: [],
-      newSkill: '',
-      hasSkills: [],
+      levels: [],
+      newLevel: '',
+      hasLevels: [],
       errors: {
         "add": {
           "error": null,
@@ -163,8 +169,8 @@
           showDismissibleAlert: false
         }
       },
-      skillTable: {
-        id: "skills",
+      levelTable: {
+        id: "levels",
         perPage: 5,
         currentPage: 1,
         fields: [{
@@ -184,31 +190,26 @@
     }),
     methods: {
       async getAll () {
-        this.hasSkills = await this.form.get('/api/skills')
-        if( this.hasSkills.status === 200 ) this.skills = this.hasSkills.data.body.data
-        this.hasSkills = []
+        this.hasLevels = await this.form.get('/api/level')
+        if( this.hasLevels.status === 200 ) this.levels = this.hasLevels.data.body.data
+        this.hasLevels = []
       },
-      async get ( skill_id ) {
-        await this.form.patch('/api/skills/' + skill_id )
-      },
-
-      async editStatus( skill ) {
-        await this.form.patch('/api/skills/' + skill.id + '/status')
+      async editStatus( level ) {
+        await this.form.patch('/api/level/' + level.id + '/status')
             .then((response)=>{
-              this.skills.filter((s) => {
-                if( s.id == skill.id ) {
+              this.levels.filter((s) => {
+                if( s.id == level.id ) {
                   s.is_active = !s.is_active
                   return
                 }
               })
             })
-
       },
 
-      async addSkill() {
+      async addLevel() {
         var nf = this.newForm
         this.setValueNewForm(nf.name, true)
-        await nf.post('/api/skills')
+        await nf.post('/api/level')
         .then(() => {
           this.setValueNewForm()
           this.getAll()
@@ -220,10 +221,10 @@
         })
       },
 
-      async updateSkill() {
+      async updateLevel() {
         var ef = this.editForm
         this.setValueEditForm(ef.name, ef.id, ef.update, true)
-        await ef.put( '/api/skills/' + ef.id )
+        await ef.put( '/api/level/' + ef.id )
         .then(() => {
           this.setValueEditForm ()
           this.getAll ()
@@ -234,16 +235,16 @@
           this.setErrors( 'edit', this.isArrayOrObject(error.response.data.body.error) )
         })
       },
-      edit( skill ) {
-        this.editForm.name = skill.name
-        this.editForm.id   = skill.id
+      edit( level ) {
+        this.editForm.name = level.name
+        this.editForm.id   = level.id
         this.editForm.update = true
       },
 
-      async deleteSkill( skill ) {
-        var btn_delete = document.querySelector(".btn.btn-delete-skill."+skill.name)
+      async deleteLevel( level ) {
+        var btn_delete = document.querySelector(".btn.btn-delete-level."+level.name)
         this.changeBtnDisabled(btn_delete, true)
-        await this.form.delete('/api/skills/' + skill.id )
+        await this.form.delete('/api/level/' + level.id )
         .then(() => {
           this.getAll ()
         })
@@ -303,8 +304,8 @@
     computed: {
       items () {
         return this.keyword
-          ? this.skills.filter( item => this.convertStringToLowerCase(item.name).includes( this.convertStringToLowerCase(this.keyword) ) )
-          : this.skills
+          ? this.levels.filter( item => this.convertStringToLowerCase(item.name).includes( this.convertStringToLowerCase(this.keyword) ) )
+          : this.levels
       }
     }
   }

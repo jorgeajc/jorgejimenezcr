@@ -12,11 +12,6 @@ return [
         'no_registered' => 'No hay colores registrados',
         'no_active'     => 'No hay colores activos',
     ],
-    'program_lang' => [
-        'not_found'     => 'Lenguaje de programación no encontrado',
-        'no_registered' => 'No hay lenguajes de programación registrados',
-        'no_active'     => 'No hay lenguajes de programación activos',
-    ],
     'user' => [
         'education' => [
             'not_found'     => 'Educacion no encontrada',
@@ -24,16 +19,8 @@ return [
             'no_active'     => 'No hay educación activa',
             'not_has'       => 'Usuario no tiene educación',
         ],
-        'program_lang' => [
-            'not_found'     => 'Lenguaje de programación no encontrada',
-            'no_registered' => 'No hay lenguajes de programación registradas',
-            'no_active'     => 'No hay lenguajes de programación activas',
-            'not_has'       => 'Usuario no tiene lenguajes de programación',
-            'has'           => 'Usuario ya tiene este lenguaje de programación',
-            'error'         => 'Error de edición',
-        ],
         'skills' => [
-            'not_found'     => 'Lenguaje de programación no encontrada',
+            'not_found'     => 'habilidad no encontrada',
             'no_registered' => 'No hay habilidades registradas',
             'no_active'     => 'No hay habilidades activas',
             'not_find'      => 'Usuario no tiene habilidad',
