@@ -44,7 +44,7 @@
       @foreach ($user->experiences as $experience)
         <div class="resume-item">
           <h4>{{ $experience->name }}</h4>
-          <h5> {{ $experience->startDate }} - {{ $experience->endDate }} </h5>
+          {{-- <h5> {{ $experience->StartDate }} - {{ $experience->endDate }} </h5> --}}
           <p><em>{{ $experience->place }}</em></p>
           <ul>
             @foreach ($experience->details as $detail)
