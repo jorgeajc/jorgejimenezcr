@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Http\Controllers\Mails\NotifyDeployController;
 
 class NotifyDeploy extends Command {
     /**
@@ -34,6 +35,7 @@ class NotifyDeploy extends Command {
      * @return int
      */
     public function handle() {
+        (new NotifyDeployController())->deploySuccess( );
         return 0;
     }
 }
