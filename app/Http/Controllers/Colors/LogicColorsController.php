@@ -18,7 +18,7 @@ class LogicColorsController extends Controller {
         $this->responses = new HandlerResponsesController;
     }
     public function all() {
-        $color = Colors::all();
+        $color = Colors::with('social_media')->get();
         if( count($color) == 0 ) return $this->responses->jsonValidationError( ["color"=>__('api.color.no_registered')] );
         return $this->responses->jsonSuccess( $color );
     }
@@ -54,6 +54,13 @@ class LogicColorsController extends Controller {
         $color->update([
             "is_active" => !$color->is_active
         ]);
+        return $this->responses->jsonSuccess( $color );
+    }
+    public function delete( $id ) {
+        $color = Colors::find( $id );
+        if( !$color ) return $this->responses->jsonNotFound( ["color"=>__('api.color.not_found')] );
+        if( count($color->social_media) > 0 ) return $this->responses->jsonNotFound( ["color"=>__('api.color.delete_failed')] );
+        $color->delete();
         return $this->responses->jsonSuccess( $color );
     }
 }

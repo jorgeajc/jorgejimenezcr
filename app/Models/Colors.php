@@ -15,6 +15,6 @@ class Colors extends Model
     ];
 
     public function social_media() {
-        return $this->hasMany(SocialsMedias::class);
+        return $this->hasMany(SocialsMedias::class, 'color_id');
     }
 }

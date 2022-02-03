@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('colors', [LogicColorsController::class, "create"]);
     Route::put('colors/{id}', [LogicColorsController::class, "update"]);
     Route::patch('colors/{id}/status', [LogicColorsController::class, "changeStatus"]);
+    Route::delete('colors/{id}', [LogicColorsController::class, "delete"]);
 
 
     /**
