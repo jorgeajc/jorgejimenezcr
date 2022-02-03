@@ -30,7 +30,6 @@ export default [
 
       { path: 'skills' , name: 'skills.index', component: page('settings/skills/skills.vue') },
       { path: 'levels' , name: 'levels.index', component: page('settings/levels/levels.vue') },
-      { path: 'programming_languages' , name: 'programming_languages.index', component: page('settings/programming_languages/programming_languages.vue') },
     ]
   },
 

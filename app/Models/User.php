@@ -145,7 +145,4 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function educations() {
         return $this->hasMany(Educations::class);
     }
-    public function programmingLanguages() {
-        return $this->belongsToMany(ProgrammingLanguages::class, 'users_programming_languages')->withPivot('user_id', 'programming_languages_id', 'level_id', 'percentage', 'year_experience', 'is_active');
-    }
 }
