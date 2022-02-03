@@ -11,10 +11,8 @@ use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Skills\LogicSkillsController;
 use App\Http\Controllers\Colors\LogicColorsController;
-use App\Http\Controllers\ProgrammingLanguages\LogicProgrammingLanguagesController;
 use App\Http\Controllers\Levels\LogicLevelsController;
 use App\Http\Controllers\User\Skills\LogicUserSkillsController;
-use App\Http\Controllers\User\ProgrammingLanguages\LogicUserProgramLangController;
 use App\Http\Controllers\User\SocialsMedias\LogicSocialsMediasController;
 use App\Http\Controllers\User\Educations\LogicEducationsController;
 use App\Http\Controllers\User\Experiences\LogicExperiencesController;
@@ -60,18 +58,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('colors/{id}', [LogicColorsController::class, "update"]);
     Route::patch('colors/{id}/status', [LogicColorsController::class, "changeStatus"]);
 
-    /**
-     * apis Programming languages
-     */
-    Route::get('programming/languages', [LogicProgrammingLanguagesController::class, "all"]);
-    Route::get('programming/languages/active', [LogicProgrammingLanguagesController::class, "getActive"]);
-    Route::get('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "find"]);
-    Route::post('programming/languages', [LogicProgrammingLanguagesController::class, "create"]);
-    Route::put('programming/languages/{id}', [LogicProgrammingLanguagesController::class, "update"]);
-    Route::patch('programming/languages/{id}/status', [LogicProgrammingLanguagesController::class, "changeStatus"]);
 
     /**
-     * apis Programming languages
+     * apis level languages
      */
     Route::get('level', [LogicLevelsController::class, "all"]);
     Route::get('level/active', [LogicLevelsController::class, "getActive"]);
@@ -90,16 +79,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('skills', [LogicUserSkillsController::class, "create"]);
         Route::delete('skills/{s_id}', [LogicUserSkillsController::class, "remove"]);
         Route::patch('skills/{s_id}', [LogicUserSkillsController::class, "changeStatus"]);
-
-        /**
-         * apis user Programming languages
-         */
-
-        Route::get('programming/languages', [LogicUserProgramLangController::class, "all"]);
-        Route::get('programming/languages/{p_id}', [LogicUserProgramLangController::class, "find"]);
-        Route::post('programming/languages', [LogicUserProgramLangController::class, "create"]);
-        Route::delete('programming/languages/{p_id}', [LogicUserProgramLangController::class, "remove"]);
-        Route::patch('programming/languages/{p_id}', [LogicUserProgramLangController::class, "changeStatus"]);
 
         /**
          * apis user Social medias

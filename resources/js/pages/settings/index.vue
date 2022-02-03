@@ -64,7 +64,7 @@ export default {
           route: 'colors.index'
         },
 
-        // skills, levels and programming languages
+        // skills, levels
         {
           icon: 'user',
           name: "Habilidades",
@@ -75,11 +75,6 @@ export default {
           name: "Niveles",
           route: 'levels.index'
         },
-        {
-          icon: 'user',
-          name: "Lenguajes de programación",
-          route: 'programming_languages.index'
-        }
       ]
     }
   }
