@@ -55,10 +55,19 @@ class LogicExperiencesController extends Controller
 
         $user = Auth::user();
 
-        $education = $user->experiences()->where('id', $experience_id )->first();
-        if( !$education ) return $this->responses->jsonNotFound( ["education"=>__('api.user.experience.not_found')] );
+        $experience = $user->experiences()->where('id', $experience_id )->first();
+        if( !$experience ) return $this->responses->jsonNotFound( ["experience"=>__('api.user.experience.not_found')] );
 
-        $education->update($request->all());
-        return $education;
+        $experience->update($request->all());
+        return $experience;
     }
+
+    public function delete( $experience_id ) {
+        $experience = Auth::user()->experiences()->where('id', $experience_id )->first();
+        if( !$experience ) return $this->responses->jsonNotFound( ["experience"=>__('api.user.experience.not_found')] );
+        if( count($experience->details) > 0 ) return $this->responses->jsonNotFound( ["experience"=>__('api.user.experience.delete_failed')] );
+        $experience->delete();
+        return $this->responses->jsonSuccess( $experience );
+    }
+
 }

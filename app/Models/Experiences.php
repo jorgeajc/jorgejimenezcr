@@ -23,6 +23,9 @@ class Experiences extends Model {
         'description'
     ];
 
+    /**
+     * relationship
+     */
     public function users() {
         return $this->belongsTo(User::class);
     }
@@ -31,6 +34,9 @@ class Experiences extends Model {
         return $this->hasMany(ExperienceDetails::class, 'experiences_id');
     }
 
+    /**
+     * dates
+     * */
     public function getStartDateAttribute() {
         return $this->parseMonth($this->attributes['start_month']) . ' ' . $this->attributes['start_year'];
     }
@@ -50,5 +56,9 @@ class Experiences extends Model {
 
     public function getStartDateFilterAttribute() {
         return $this->attributes['start_month'] . ' ' . $this->attributes['start_year'];
+    }
+
+    public function getCreatedAtAttribute($date){
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }

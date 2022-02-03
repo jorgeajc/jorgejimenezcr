@@ -106,7 +106,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('experiences/{e_id}', [LogicExperiencesController::class, "find"]);
         Route::post('experiences', [LogicExperiencesController::class, "create"]);
         Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
-        Route::patch('experiences/{e_id}', [LogicExperiencesController::class, "changeStatus"]);
+        Route::patch('experiences/{e_id}/status', [LogicExperiencesController::class, "changeStatus"]);
+        Route::delete('experiences/{id}', [LogicExperiencesController::class, "delete"]);
     });
 });
 

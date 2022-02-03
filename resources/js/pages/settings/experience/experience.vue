@@ -1,10 +1,10 @@
 <template>
-  <card :title="'Colores'">
+  <card :title="'Experiencia'">
     <div class="form-group row">
       <div class="col-md-6 col-12">
         <!-- form create -->
         <div class="col-12">
-          <form @submit.prevent="addColor">
+          <form @submit.prevent="addExperience">
             <b-input-group prepend="name" class="mt-3">
                 <b-form-input type="text" v-model="newForm.name"></b-form-input>
                 <b-input-group-append>
@@ -28,7 +28,7 @@
             <b-input-group prepend="name" class="mt-3">
               <b-form-input type="text" v-model="editForm.name"></b-form-input>
               <b-input-group-append>
-                <form @submit.prevent="updateColor">
+                <form @submit.prevent="updateExperience">
                   <v-button
                     :disabled="editForm.disabled"
                     :loading="editForm.disabled"
@@ -58,22 +58,31 @@
     <div class="form-group row">
       <div class="col-md-12 ml-md-auto">
         <b-pagination
-          v-model="colorTable.currentPage"
-          :total-rows="colors.length"
-          :per-page="colorTable.perPage"
-          :aria-controls="colorTable.id"
+          v-model="experienceTable.currentPage"
+          :total-rows="experiences.length"
+          :per-page="experienceTable.perPage"
+          :aria-controls="experienceTable.id"
         ></b-pagination>
         <b-table
-          :id="colorTable.id"
+          :id="experienceTable.id"
           :items="items"
           :keyword="keyword"
-          :per-page="colorTable.perPage"
-          :current-page="colorTable.currentPage"
-          :fields="colorTable.fields"
+          :per-page="experienceTable.perPage"
+          :current-page="experienceTable.currentPage"
+          :fields="experienceTable.fields"
           stacked="md"
           class="table-responsive-md"
           small
         >
+          <template #cell(place)="data">
+            <div> {{ data.item.place }} </div>
+          </template>
+
+          <template #cell(dates)="data">
+            <div> {{ data.item.start_month }} - {{ data.item.start_year }}</div> <hr>
+            <div> {{ data.item.end_month }} - {{ data.item.end_year }}</div>
+          </template>
+
           <template #cell(is_active)="data">
             <div class="check-status">
               <checkbox
@@ -99,26 +108,26 @@
                   ></v-button>
                 </form>
               </div>
-              <div class="col-6 pl-sm-0" v-if="data.item.social_media.length == 0">
-                <form @submit.prevent="deleteColor(data.item)">
+              <!-- <div class="col-6 pl-sm-0" v-if="data.item.social_media.length == 0"> -->
+                <form @submit.prevent="deleteExperience(data.item)">
                    <v-button
                     :type="'danger'"
                     :iconPrefix="'fas'"
                     :iconName="'trash'"
-                    class="btn-delete-color"
+                    class="btn-delete-experience"
                     :class="data.item.name"
                   ></v-button>
                 </form>
-              </div>
+              <!-- </div> -->
             </div>
           </template>
 
         </b-table>
         <b-pagination
-          v-model="colorTable.currentPage"
-          :total-rows="colors.length"
-          :per-page="colorTable.perPage"
-          :aria-controls="colorTable.id"
+          v-model="experienceTable.currentPage"
+          :total-rows="experiences.length"
+          :per-page="experienceTable.perPage"
+          :aria-controls="experienceTable.id"
         ></b-pagination>
       </div>
     </div>
@@ -156,9 +165,9 @@
         update: false,
         disabled: false
       }),
-      colors: [],
-      newColor: '',
-      hasColors: [],
+      experiences: [],
+      newExperience: '',
+      hasExperiences: [],
       errors: {
         "add": {
           "error": null,
@@ -169,13 +178,18 @@
           showDismissibleAlert: false
         }
       },
-      colorTable: {
-        id: "colors",
+      experienceTable: {
+        id: "experiences",
         perPage: 5,
         currentPage: 1,
         fields: [{
             key: 'name',
             sortable: true
+          },{
+            key: 'place',
+            sortable: true
+          },{
+            key: 'dates'
           },{
             key: 'is_active'
           },{
@@ -190,15 +204,15 @@
     }),
     methods: {
       async getAll () {
-        this.hasColors = await this.form.get('/api/colors')
-        if( this.hasColors.status === 200 ) this.colors = this.hasColors.data.body.data
-        this.hasColors = []
+        this.hasExperiences = await this.form.get('/api/user/experiences')
+        if( this.hasExperiences.status === 200 ) this.experiences = this.hasExperiences.data.body.data
+        this.hasExperiences = []
       },
-      async editStatus( color ) {
-        await this.form.patch('/api/colors/' + color.id + '/status')
+      async editStatus( experience ) {
+        await this.form.patch('/api/user/experiences/' + experience.id + '/status')
             .then((response)=>{
-              this.colors.filter((s) => {
-                if( s.id == color.id ) {
+              this.experiences.filter((s) => {
+                if( s.id == experience.id ) {
                   s.is_active = !s.is_active
                   return
                 }
@@ -206,10 +220,10 @@
             })
       },
 
-      async addColor() {
+      async addExperience() {
         var nf = this.newForm
         this.setValueNewForm(nf.name, true)
-        await nf.post('/api/colors')
+        await nf.post('/api/user/experiences')
         .then(() => {
           this.setValueNewForm()
           this.getAll()
@@ -221,10 +235,10 @@
         })
       },
 
-      async updateColor() {
+      async updateExperience() {
         var ef = this.editForm
         this.setValueEditForm(ef.name, ef.id, ef.update, true)
-        await ef.put( '/api/colors/' + ef.id )
+        await ef.put( '/api/user/experiences/' + ef.id )
         .then(() => {
           this.setValueEditForm ()
           this.getAll ()
@@ -235,16 +249,16 @@
           this.setErrors( 'edit', this.isArrayOrObject(error.response.data.body.error) )
         })
       },
-      edit( color ) {
-        this.editForm.name = color.name
-        this.editForm.id   = color.id
+      edit( experience ) {
+        this.editForm.name = experience.name
+        this.editForm.id   = experience.id
         this.editForm.update = true
       },
 
-      async deleteColor( color ) {
-        var btn_delete = document.querySelector(".btn.btn-delete-color."+color.name)
+      async deleteExperience( experience ) {
+        var btn_delete = document.querySelector(".btn.btn-delete-experience."+experience.name)
         this.changeBtnDisabled(btn_delete, true)
-        await this.form.delete('/api/colors/' + color.id )
+        await this.form.delete('/api/user/experiences/' + experience.id )
         .then(() => {
           this.getAll ()
         })
@@ -304,8 +318,8 @@
     computed: {
       items () {
         return this.keyword
-          ? this.colors.filter( item => this.convertStringToLowerCase(item.name).includes( this.convertStringToLowerCase(this.keyword) ) )
-          : this.colors
+          ? this.experiences.filter( item => this.convertStringToLowerCase(item.name).includes( this.convertStringToLowerCase(this.keyword) ) )
+          : this.experiences
       }
     }
   }

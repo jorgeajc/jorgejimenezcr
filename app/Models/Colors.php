@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Colors extends Model
 {
@@ -16,5 +17,9 @@ class Colors extends Model
 
     public function social_media() {
         return $this->hasMany(SocialsMedias::class, 'color_id');
+    }
+
+    public function getCreatedAtAttribute($date){
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }
