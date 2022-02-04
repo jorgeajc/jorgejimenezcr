@@ -39,3 +39,10 @@ php artisan migrate --force
 npm run install
 npm run prod
 ```
+### commands to run from clear git branch
+```
+git branch
+git branch -d "name"
+git remote prune origin
+git fetch --prune
+```

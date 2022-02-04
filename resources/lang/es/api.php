@@ -11,6 +11,7 @@ return [
         'not_found'     => 'Color no encontrado',
         'no_registered' => 'No hay colores registrados',
         'no_active'     => 'No hay colores activos',
+        'delete_failed' => 'Error al eliminar',
     ],
     'user' => [
         'education' => [
@@ -45,6 +46,7 @@ return [
             'not_has'       => 'Usuario no tiene experiencias',
             'has'           => 'Usuario ya tiene esta experiencia',
             'error'         => 'Error de edición',
+            'delete_failed' => 'Error al eliminar',
         ],
         'level' => [
             'not_found'     => 'Niveles no encontrada',

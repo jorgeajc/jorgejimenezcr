@@ -2,8 +2,26 @@
   <div class="row">
     <div class="col-md-3">
       <card :title="$t('settings')" class="settings-card">
+
+        <ul class="mt-3 mb-1">
+          General
+        </ul>
+        <ul class="nav flex-column nav-pills" title="asd">
+          <li v-for="tab in tabsGeneral" :key="tab.route" class="nav-item">
+            <router-link :to="{ name: tab.route }" class="nav-link" active-class="active">
+              <fa :icon="tab.icon" fixed-width />
+              {{ tab.name }}
+            </router-link>
+          </li>
+        </ul>
+
+        <hr>
+
+        <ul class="mb-1">
+          Mis Propiedades
+        </ul>
         <ul class="nav flex-column nav-pills">
-          <li v-for="tab in tabs" :key="tab.route" class="nav-item">
+          <li v-for="tab in tabsUser" :key="tab.route" class="nav-item">
             <router-link :to="{ name: tab.route }" class="nav-link" active-class="active">
               <fa :icon="tab.icon" fixed-width />
               {{ tab.name }}
@@ -26,7 +44,7 @@ export default {
   middleware: 'auth',
 
   computed: {
-    tabs () {
+    tabsGeneral () {
       return [
         {
           icon: 'user',
@@ -38,26 +56,8 @@ export default {
           name: this.$t('password'),
           route: 'settings.password'
         },
-        // education
-        {
-          icon: 'user',
-          name: "Educación",
-          route: 'education.index'
-        },
 
-        // experience
-        {
-          icon: 'user',
-          name: "Experiencia",
-          route: 'experience.index'
-        },
-
-        // social media and colors
-        {
-          icon: 'user',
-          name: "Medios Sociales",
-          route: 'social_medias.index'
-        },
+        // colors
         {
           icon: 'user',
           name: "Colores",
@@ -76,13 +76,37 @@ export default {
           route: 'levels.index'
         },
       ]
+    },
+    tabsUser () {
+      return [
+        // education
+        {
+          icon: 'user',
+          name: "Educación",
+          route: 'education.index'
+        },
+
+        // experience
+        {
+          icon: 'user',
+          name: "Experiencia",
+          route: 'experience.index'
+        },
+
+        // social media
+        {
+          icon: 'user',
+          name: "Medios Sociales",
+          route: 'social_medias.index'
+        }
+      ]
     }
   }
 }
 </script>
 
 <style>
-.settings-card .card-body {
-  padding: 0;
-}
+  .settings-card .card-body {
+    padding: 0;
+  }
 </style>

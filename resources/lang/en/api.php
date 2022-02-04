@@ -11,6 +11,7 @@ return [
         'not_found'       => 'Color not found',
         'no_registered'   => 'No registered colors',
         'no_active'       => 'No colors active',
+        'delete_failed'   => 'Error to delete',
     ],
     'user' => [
         'education' => [
@@ -45,6 +46,7 @@ return [
             'not_has'         => 'User not has the experience',
             'has'             => 'User already has this experience',
             'error'           => 'Edition error',
+            'delete_failed'   => 'Error to delete',
         ],
         'level' => [
             'not_found'       => 'Level not found',

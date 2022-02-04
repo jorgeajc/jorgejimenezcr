@@ -12,8 +12,7 @@ use App\Models\Colors;
 use App\Models\SocialsMedias;
 
 use Auth;
-class LogicEducationsController extends Controller
-{
+class LogicEducationsController extends Controller{
     protected $rules;
     protected $responses;
 
@@ -61,5 +60,12 @@ class LogicEducationsController extends Controller
 
         $education->update($request->all());
         return $education;
+    }
+
+    public function delete( $education_id ) {
+        $education = Auth::user()->educations()->where('id', $education_id )->first();
+        if( !$education ) return $this->responses->jsonNotFound( ["education"=>__('api.user.education.not_found')] );
+        $education->delete();
+        return $this->responses->jsonSuccess( $education );
     }
 }
