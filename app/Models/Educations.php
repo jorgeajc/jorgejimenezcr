@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Educations extends Model
 {
@@ -26,5 +27,9 @@ class Educations extends Model
         $start  = $this->attributes['start_year'];
         $end    = $this->attributes['end_year'];
         return $start . ( $start==$end ? "" : " - " . ($end?$end:"Presente"));
+    }
+
+    public function getCreatedAtAttribute($date){
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }

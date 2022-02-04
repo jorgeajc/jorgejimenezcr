@@ -97,7 +97,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('education/{e_id}', [LogicEducationsController::class, "find"]);
         Route::post('education', [LogicEducationsController::class, "create"]);
         Route::put('education/{e_id}', [LogicEducationsController::class, "update"]);
-        Route::patch('education/{e_id}', [LogicEducationsController::class, "changeStatus"]);
+        Route::patch('education/{e_id}/status', [LogicEducationsController::class, "changeStatus"]);
+        Route::delete('education/{id}', [LogicEducationsController::class, "delete"]);
 
         /**
          * apis user educaction
