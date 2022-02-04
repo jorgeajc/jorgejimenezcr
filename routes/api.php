@@ -88,7 +88,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('socials/medias/{s_id}', [LogicSocialsMediasController::class, "find"]);
         Route::post('socials/medias', [LogicSocialsMediasController::class, "create"]);
         Route::put('socials/medias/{s_id}', [LogicSocialsMediasController::class, "update"]);
-        Route::patch('socials/medias/{s_id}', [LogicSocialsMediasController::class, "changeStatus"]);
+        Route::patch('socials/medias/{s_id}/status', [LogicSocialsMediasController::class, "changeStatus"]);
+        Route::delete('socials/medias/{s_id}', [LogicSocialsMediasController::class, "delete"]);
 
         /**
          * apis user educaction
@@ -98,7 +99,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('education', [LogicEducationsController::class, "create"]);
         Route::put('education/{e_id}', [LogicEducationsController::class, "update"]);
         Route::patch('education/{e_id}/status', [LogicEducationsController::class, "changeStatus"]);
-        Route::delete('education/{id}', [LogicEducationsController::class, "delete"]);
+        Route::delete('education/{e_id}', [LogicEducationsController::class, "delete"]);
 
         /**
          * apis user educaction
@@ -108,7 +109,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('experiences', [LogicExperiencesController::class, "create"]);
         Route::put('experiences/{e_id}', [LogicExperiencesController::class, "update"]);
         Route::patch('experiences/{e_id}/status', [LogicExperiencesController::class, "changeStatus"]);
-        Route::delete('experiences/{id}', [LogicExperiencesController::class, "delete"]);
+        Route::delete('experiences/{e_id}', [LogicExperiencesController::class, "delete"]);
     });
 });
 

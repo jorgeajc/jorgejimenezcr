@@ -25,7 +25,7 @@ class LogicSocialsMediasController extends Controller
     public function all() {
         $user = Auth::user();
         if( count($user->social_media) == 0 ) return $this->responses->jsonNotFound(["user" => __('api.user.social_media.not_has')]);
-        return $this->responses->jsonSuccess( $user->social_media );
+        return $this->responses->jsonSuccess( $user->social_media()->with('color')->get() );
     }
     public function create( Request $request ) {
         $validate = $this->rules->validateCreate($request);
@@ -70,5 +70,12 @@ class LogicSocialsMediasController extends Controller
 
         $social_media->update($request->all());
         return $social_media;
+    }
+
+    public function delete( $social_id ) {
+        $social_media =  Auth::user()->social_media()->where('id', $social_id )->first();
+        if( !$social_media ) return $this->responses->jsonNotFound( ["education"=>__('api.user.social_media.not_found')] );
+        $social_media->delete();
+        return $this->responses->jsonSuccess( $social_media );
     }
 }
